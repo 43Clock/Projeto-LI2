@@ -1,16 +1,49 @@
 #include <stdio.h>
+#include <ctype.h>
 #include "estado.h"
 #include "auxiliares.h"
 
 
-int main()
-{
-    char c;
-    printf("Escolher qual jogador joga primeiro (X ou O): ");
-    scanf("%c",&c);
+ESTADO interface (ESTADO e) {
+    char n;
+    int i;
+    char buffer[100];
+    fgets(buffer,100,stdin);
+    n = buffer[0];
+    switch (toupper(n)) {
+        case 'N':
+            e = reset(e);
+            e.grelha[3][4] = VALOR_O;
+            e.grelha[4][3] = VALOR_O;
+            e.grelha[3][3] = VALOR_X;
+            e.grelha[4][4] = VALOR_X;
+            printf("\n");
+            printa(e);
+            printf("\n");
+            break;
+
+        case 'J':
+            e = jogarX(e,buffer);
+            printf("\n");
+            printa(e);
+            printf("\n");
+            break;
+
+
+
+    }
+    return e;
+}
+
+
+int main() {
     ESTADO e = {0};
-
-
+    while (1){
+        printf("Reversi > ");
+        e = interface(e);
+    }
+}
+/*
     // estado inicial do tabuleiro. Inicio do jogo!
     e.grelha[3][4] = VALOR_O;
     e.grelha[4][3] = VALOR_O;
@@ -59,4 +92,4 @@ int main()
 
 
     return 0;
-}
+}*/

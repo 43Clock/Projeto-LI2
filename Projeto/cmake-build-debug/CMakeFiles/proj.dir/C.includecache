@@ -6,17 +6,19 @@
 
 #IncludeRegexTransform: 
 
-/home/luis43/CLionProjects/Projeto/auxiliares.h
+/home/luis43/CLionProjects/Projeto/Projeto/auxiliares.h
 estado.h
-/home/luis43/CLionProjects/Projeto/estado.h
+/home/luis43/CLionProjects/Projeto/Projeto/estado.h
 
-/home/luis43/CLionProjects/Projeto/estado.h
+/home/luis43/CLionProjects/Projeto/Projeto/estado.h
 
-/home/luis43/CLionProjects/Projeto/main.c
+/home/luis43/CLionProjects/Projeto/Projeto/main.c
 stdio.h
 -
+ctype.h
+-
 estado.h
-/home/luis43/CLionProjects/Projeto/estado.h
+/home/luis43/CLionProjects/Projeto/Projeto/estado.h
 auxiliares.h
-/home/luis43/CLionProjects/Projeto/auxiliares.h
+/home/luis43/CLionProjects/Projeto/Projeto/auxiliares.h
 

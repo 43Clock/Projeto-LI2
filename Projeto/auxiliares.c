@@ -1,6 +1,27 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "auxiliares.h"
 #include "estado.h"
+
+
+void opcoes () {
+    printf("N <peça> para começar um novo jogo.\n");
+    printf("L <ficheiro> ler ficheiro de jogo.\n");
+    printf("J <L,C> para fazer a jogada.\n");
+    printf("S para mostrar as jogadas posiveis.\n");
+    printf("H sugestão de jogada.\n");
+    printf("U para desfazer a ultima jogada feita.\n");
+    printf("A <peça> novo jogo contra 'bot'.\n");
+    printf("Q para sair.\n");
+}
+
+ESTADO reset (ESTADO e) {
+    int i,j;
+    for (i = 0;i<8;i++)
+        for (j = 0;j<8;j++)
+            e.grelha[i][j] = VAZIA;
+    return e;
+}
 
 
 int conta (ESTADO e,VALOR n) {
@@ -12,32 +33,44 @@ int conta (ESTADO e,VALOR n) {
     return acc;
 }
 
-ESTADO jogarX (ESTADO e) {
+ESTADO jogarX (ESTADO e,char s[]) {
     int l,c;
-    printf("\nTurno do jogador X. Escolher posição: ");
-    scanf ("%d %d",&l,&c);
+    int i;
     putchar('\n');
-    if (l-1 >= 8 || c-1 >=8 || e.grelha[l-1][c-1] != VAZIA)
-        while (l-1 >= 8 || c-1 >=8 || e.grelha[l-1][c-1] != VAZIA) {
-            printf("Posição Invalida.Tenta outra vez: ");
-            scanf ("%d %d",&l,&c);
+    for (i = 0;s[i] == 'j' || s[i] == 'J' ||s[i] == ' ' ;i++);
+        l = s[i]-48;
+        //printf("%d",l);
+    i++;
+    for (;s[i] == 'j' || s[i] == 'J' ||s[i] == ' ' ;i++);
+        c = s[i]-48;
+    if (l-1 >= 8 || c-1 >= 8 || e.grelha[l-1][c-1] != VAZIA){
+        printf("Posição Invalida\n");
+        printf("%c",l);
         }
-    e.grelha[l-1][c-1] = VALOR_X;
-    return e;
+    else {
+        e.grelha[l-1][c-1] = VALOR_X;
+        return e;
+    }
 }
 
-ESTADO jogarO (ESTADO e) {
+ESTADO jogarO (ESTADO e,char s[]) {
     int l,c;
-    printf("\nTurno do jogador O. Escolher posição: ");
-    scanf ("%d %d",&l,&c);
+    int i;
     putchar('\n');
-    if (l-1 >= 8 || c-1 >=8 || e.grelha[l-1][c-1] != VAZIA)
-        while (l-1 >= 8 || c-1 >=8 || e.grelha[l-1][c-1] != VAZIA) {
-            printf("\nPosição Invalida.Tenta outra vez: ");
-            scanf ("%d %d",&l,&c);
-        }
-    e.grelha[l-1][c-1] = VALOR_O;
-    return e;
+    for (i = 0;s[i] == 'j' || s[i] == 'J' ||s[i] == ' ' ;i++);
+    l = s[i]-48;
+    //printf("%d",l);
+    i++;
+    for (;s[i] == 'j' || s[i] == 'J' ||s[i] == ' ' ;i++);
+    c = s[i]-48;
+    if (l-1 >= 8 || c-1 >= 8 || e.grelha[l-1][c-1] != VAZIA){
+        printf("Posição Invalida\n");
+        printf("%c",l);
+    }
+    else {
+        e.grelha[l-1][c-1] = VALOR_O;
+        return e;
+    }
 }
 
 int possivelJogar (ESTADO e) { //0 == não é possivel jogar

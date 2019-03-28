@@ -43,10 +43,10 @@ RM = /home/luis43/Clion/bin/cmake/linux/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/luis43/CLionProjects/Projeto
+CMAKE_SOURCE_DIR = /home/luis43/CLionProjects/Projeto/Projeto
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/luis43/CLionProjects/Projeto/cmake-build-debug
+CMAKE_BINARY_DIR = /home/luis43/CLionProjects/Projeto/Projeto/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/proj.dir/depend.make
@@ -59,42 +59,42 @@ include CMakeFiles/proj.dir/flags.make
 
 CMakeFiles/proj.dir/main.c.o: CMakeFiles/proj.dir/flags.make
 CMakeFiles/proj.dir/main.c.o: ../main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luis43/CLionProjects/Projeto/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/proj.dir/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/proj.dir/main.c.o   -c /home/luis43/CLionProjects/Projeto/main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luis43/CLionProjects/Projeto/Projeto/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/proj.dir/main.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/proj.dir/main.c.o   -c /home/luis43/CLionProjects/Projeto/Projeto/main.c
 
 CMakeFiles/proj.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/proj.dir/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/luis43/CLionProjects/Projeto/main.c > CMakeFiles/proj.dir/main.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/luis43/CLionProjects/Projeto/Projeto/main.c > CMakeFiles/proj.dir/main.c.i
 
 CMakeFiles/proj.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/proj.dir/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/luis43/CLionProjects/Projeto/main.c -o CMakeFiles/proj.dir/main.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/luis43/CLionProjects/Projeto/Projeto/main.c -o CMakeFiles/proj.dir/main.c.s
 
 CMakeFiles/proj.dir/estado.c.o: CMakeFiles/proj.dir/flags.make
 CMakeFiles/proj.dir/estado.c.o: ../estado.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luis43/CLionProjects/Projeto/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/proj.dir/estado.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/proj.dir/estado.c.o   -c /home/luis43/CLionProjects/Projeto/estado.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luis43/CLionProjects/Projeto/Projeto/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/proj.dir/estado.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/proj.dir/estado.c.o   -c /home/luis43/CLionProjects/Projeto/Projeto/estado.c
 
 CMakeFiles/proj.dir/estado.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/proj.dir/estado.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/luis43/CLionProjects/Projeto/estado.c > CMakeFiles/proj.dir/estado.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/luis43/CLionProjects/Projeto/Projeto/estado.c > CMakeFiles/proj.dir/estado.c.i
 
 CMakeFiles/proj.dir/estado.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/proj.dir/estado.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/luis43/CLionProjects/Projeto/estado.c -o CMakeFiles/proj.dir/estado.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/luis43/CLionProjects/Projeto/Projeto/estado.c -o CMakeFiles/proj.dir/estado.c.s
 
 CMakeFiles/proj.dir/auxiliares.c.o: CMakeFiles/proj.dir/flags.make
 CMakeFiles/proj.dir/auxiliares.c.o: ../auxiliares.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luis43/CLionProjects/Projeto/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/proj.dir/auxiliares.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/proj.dir/auxiliares.c.o   -c /home/luis43/CLionProjects/Projeto/auxiliares.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/luis43/CLionProjects/Projeto/Projeto/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/proj.dir/auxiliares.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/proj.dir/auxiliares.c.o   -c /home/luis43/CLionProjects/Projeto/Projeto/auxiliares.c
 
 CMakeFiles/proj.dir/auxiliares.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/proj.dir/auxiliares.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/luis43/CLionProjects/Projeto/auxiliares.c > CMakeFiles/proj.dir/auxiliares.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/luis43/CLionProjects/Projeto/Projeto/auxiliares.c > CMakeFiles/proj.dir/auxiliares.c.i
 
 CMakeFiles/proj.dir/auxiliares.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/proj.dir/auxiliares.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/luis43/CLionProjects/Projeto/auxiliares.c -o CMakeFiles/proj.dir/auxiliares.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/luis43/CLionProjects/Projeto/Projeto/auxiliares.c -o CMakeFiles/proj.dir/auxiliares.c.s
 
 # Object files for target proj
 proj_OBJECTS = \
@@ -110,7 +110,7 @@ proj: CMakeFiles/proj.dir/estado.c.o
 proj: CMakeFiles/proj.dir/auxiliares.c.o
 proj: CMakeFiles/proj.dir/build.make
 proj: CMakeFiles/proj.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/luis43/CLionProjects/Projeto/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable proj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/luis43/CLionProjects/Projeto/Projeto/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable proj"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/proj.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -123,6 +123,6 @@ CMakeFiles/proj.dir/clean:
 .PHONY : CMakeFiles/proj.dir/clean
 
 CMakeFiles/proj.dir/depend:
-	cd /home/luis43/CLionProjects/Projeto/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/luis43/CLionProjects/Projeto /home/luis43/CLionProjects/Projeto /home/luis43/CLionProjects/Projeto/cmake-build-debug /home/luis43/CLionProjects/Projeto/cmake-build-debug /home/luis43/CLionProjects/Projeto/cmake-build-debug/CMakeFiles/proj.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/luis43/CLionProjects/Projeto/Projeto/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/luis43/CLionProjects/Projeto/Projeto /home/luis43/CLionProjects/Projeto/Projeto /home/luis43/CLionProjects/Projeto/Projeto/cmake-build-debug /home/luis43/CLionProjects/Projeto/Projeto/cmake-build-debug /home/luis43/CLionProjects/Projeto/Projeto/cmake-build-debug/CMakeFiles/proj.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/proj.dir/depend
 
