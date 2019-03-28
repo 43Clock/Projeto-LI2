@@ -45,10 +45,13 @@ ESTADO jogarX (ESTADO e,char s[]) {
         c = s[i]-48;
     if (l-1 >= 8 || c-1 >= 8 || e.grelha[l-1][c-1] != VAZIA){
         printf("Posição Invalida\n");
-        printf("%c",l);
+        //printf("%c",l);
         }
     else {
         e.grelha[l-1][c-1] = VALOR_X;
+        printf("\n");
+        printa(e);
+        printf("\n");
         return e;
     }
 }
@@ -69,6 +72,9 @@ ESTADO jogarO (ESTADO e,char s[]) {
     }
     else {
         e.grelha[l-1][c-1] = VALOR_O;
+        printf("\n");
+        printa(e);
+        printf("\n");
         return e;
     }
 }
