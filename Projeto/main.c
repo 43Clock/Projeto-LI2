@@ -41,6 +41,10 @@ ESTADO interface (ESTADO e) {
 
                 //Vai executar a funcao e colocar uma peca no lugar
                 e = jogarX(e,buffer);
+                e = substitui(e,valor-1,l,cl);
+                printf("\n");
+                printa(e);
+                printf("\n");
             }
             else if (valor == 2) {
                 for (i = 0;buffer[i] == 'j' || buffer[i] == 'J' ||buffer[i] == ' ' ;i++);
@@ -50,6 +54,10 @@ ESTADO interface (ESTADO e) {
                 cl = buffer[i]-48;
                 if (e.grelha[l-1][cl-1] == VAZIA) valor = 1;
                 e = jogarO(e,buffer);
+                e = substitui(e,valor+1,l,cl);
+                printf("\n");
+                printa(e);
+                printf("\n");
             }
             else printf("Ainda não começou o jogo !!!!\n\n");
             break;

@@ -49,9 +49,6 @@ ESTADO jogarX (ESTADO e,char s[]) {
         }
     else {
         e.grelha[l-1][c-1] = VALOR_X;
-        printf("\n");
-        printa(e);
-        printf("\n");
         return e;
     }
 }
@@ -72,9 +69,6 @@ ESTADO jogarO (ESTADO e,char s[]) {
     }
     else {
         e.grelha[l-1][c-1] = VALOR_O;
-        printf("\n");
-        printa(e);
-        printf("\n");
         return e;
     }
 }

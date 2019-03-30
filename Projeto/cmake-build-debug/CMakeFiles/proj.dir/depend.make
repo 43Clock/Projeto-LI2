@@ -12,3 +12,7 @@ CMakeFiles/proj.dir/main.c.o: ../auxiliares.h
 CMakeFiles/proj.dir/main.c.o: ../estado.h
 CMakeFiles/proj.dir/main.c.o: ../main.c
 
+CMakeFiles/proj.dir/substituir.c.o: ../auxiliares.h
+CMakeFiles/proj.dir/substituir.c.o: ../estado.h
+CMakeFiles/proj.dir/substituir.c.o: ../substituir.c
+
