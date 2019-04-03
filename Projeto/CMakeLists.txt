@@ -3,4 +3,4 @@ project(PEO C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(proj main.c estado.h estado.c auxiliares.c auxiliares.h substituir.c)
+add_executable(proj main.c estado.h estado.c auxiliares.c auxiliares.h substituir.c Interface.c)

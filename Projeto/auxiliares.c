@@ -5,14 +5,14 @@
 
 
 void opcoes () {
-    printf("N <peça> para começar um novo jogo.\n");
+    printf("\nN <peça> para começar um novo jogo.\n");
     printf("L <ficheiro> ler ficheiro de jogo.\n");
     printf("J <L,C> para fazer a jogada.\n");
     printf("S para mostrar as jogadas posiveis.\n");
     printf("H sugestão de jogada.\n");
     printf("U para desfazer a ultima jogada feita.\n");
     printf("A <peça> novo jogo contra 'bot'.\n");
-    printf("Q para sair.\n");
+    printf("Q para sair.\n\n");
 }
 
 ESTADO reset (ESTADO e) {
@@ -20,6 +20,10 @@ ESTADO reset (ESTADO e) {
     for (i = 0;i<8;i++)
         for (j = 0;j<8;j++)
             e.grelha[i][j] = VAZIA;
+    e.grelha[3][4] = VALOR_O;
+    e.grelha[4][3] = VALOR_O;
+    e.grelha[3][3] = VALOR_X;
+    e.grelha[4][4] = VALOR_X;
     return e;
 }
 
