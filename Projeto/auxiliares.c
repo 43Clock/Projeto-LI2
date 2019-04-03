@@ -15,7 +15,7 @@ void opcoes () {
     printf("Q para sair.\n\n");
 }
 
-ESTADO reset (ESTADO e) {
+ESTADO reset (ESTADO e){
     int i,j;
     for (i = 0;i<8;i++)
         for (j = 0;j<8;j++)
@@ -42,6 +42,7 @@ ESTADO jogarX (ESTADO e,char s[]) {
     int i;
     putchar('\n');
     for (i = 0;s[i] == 'j' || s[i] == 'J' ||s[i] == ' ' ;i++);
+
         l = s[i]-48;
         //printf("%d",l);
     i++;
@@ -183,7 +184,9 @@ int possivelJogar (ESTADO e,int valor, int l, int c) { //0 == não é possivel j
 void helpPlz (ESTADO e, int valor) {
     int i,j;
     putchar ('\n');
+    printf("  1 2 3 4 5 6 7 8\n");
     for (i = 0;i<8;i++) {
+        printf("%d ",i+1);
         for (j = 0; j < 8; j++) {
             if (e.grelha[i][j] == VALOR_X) printf("X ");
             else if (e.grelha[i][j] == VALOR_O) printf("O ");

@@ -34,12 +34,28 @@ ESTADO interface (ESTADO e) {
     return e;
 }
 
+/*
+print_prompt(ESTADO e){
+    switch e.peca{
+        case VALOR_X:
+            printf("Reversi X > ");
+            break;
+            case VALOR_O:
+printf("Reversi O > ");
+            break;
+        default:
+printf("Reversi ? > ");
 
+    }
+
+
+}
+*/
 int main() {
     ESTADO e = {0};
     opcoes();
     while (1){
-        printf("Reversi > ");
+        printf("Reversi  > ");
         e = interface(e);
     }
 }

@@ -7,11 +7,19 @@ int interfaceN (ESTADO e, char buffer []) {
     int i,valor;
     for (i = 0;buffer[i] == ' ' || buffer[i] == 'N' || buffer[i] == 'n';i++ );
     char c = buffer[i];
-    if (c == 'X' || c == 'x') valor = 1;
-    else valor = 2;
-    printf("\n");
-    printa(e);
-    printf("\n");
+    if (c == 'X' || c == 'x') {
+        valor = 1;
+        printf("\n");
+        printa(e);
+        printf("\n");
+    }
+    else if (c == 'O' || c == 'o' ){
+        valor = 2;
+        printf("\n");
+        printa(e);
+        printf("\n");
+    }
+    else valor = 0;
     return valor;
 
 }
@@ -86,6 +94,5 @@ int interfaceJV (ESTADO e, char buffer [],int valor){
             valor = 1;
         }
     }
-    else printf("Ainda não começou o jogo !!!!\n\n");
     return valor;
 }
