@@ -7,24 +7,19 @@
 
 ESTADO interface (ESTADO e) {
     char n;
-    int i = 0;
-    int l,cl;
-    static int valor;
     char buffer[100];
     fgets(buffer,100,stdin);
     n = buffer[0];
     switch (toupper(n)) {
         case 'N':
-            e = reset(e);
-            valor = interfaceN(e,buffer);
+            e = interfaceN(e,buffer);
             break;
 
         case 'J':
-            valor = interfaceJV (e,buffer,valor);
-            e = interfaceJE (e,buffer,valor);
+            e = interfaceJ (e,buffer);
            break;
         case 'H':
-            helpPlz(e,valor);
+            helpPlz(e);
             break;
         case 'Q':
             exit(0);
@@ -34,28 +29,25 @@ ESTADO interface (ESTADO e) {
     return e;
 }
 
-/*
-print_prompt(ESTADO e){
-    switch e.peca{
+
+void print_prompt(ESTADO e) {
+    switch (e.peca) {
         case VALOR_X:
             printf("Reversi X > ");
             break;
-            case VALOR_O:
-printf("Reversi O > ");
+        case VALOR_O:
+            printf("Reversi O > ");
             break;
         default:
-printf("Reversi ? > ");
-
+            printf("Reversi ? > ");
     }
-
-
 }
-*/
+
 int main() {
     ESTADO e = {0};
     opcoes();
     while (1){
-        printf("Reversi  > ");
+        print_prompt(e);
         e = interface(e);
     }
 }

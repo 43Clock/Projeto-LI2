@@ -78,100 +78,100 @@ ESTADO jogarO (ESTADO e,char s[]) {
     return e;
 }
 
-int possivelJogar (ESTADO e,int valor, int l, int c) { //0 == não é possivel jogar
+int possivelJogar (ESTADO e,int l, int c) { //0 == não é possivel jogar
     int i,r = 0;
     int li = l-1;
     int ci = c-1;
     for (i = 1;i<9 && r == 0;i++) {
         switch (i) {
             case 1:
-                if (valor == 1) {
-                    if (e.grelha[li][ci] == VAZIA && e.grelha[li-1][ci] != VALOR_X && substituiAux(e,i,valor,l,c) == i)
+                if (e.peca == VALOR_X) {
+                    if (e.grelha[li][ci] == VAZIA && e.grelha[li-1][ci] != VALOR_X && substituiAux(e,i,l,c) == i)
                         r = 1;
                 }
                 else {
-                    if (e.grelha[li][ci] == VAZIA && e.grelha[li-1][ci] != VALOR_O && substituiAux(e,i,valor,l,c) == i)
+                    if (e.grelha[li][ci] == VAZIA && e.grelha[li-1][ci] != VALOR_O && substituiAux(e,i,l,c) == i)
                         r = 1;
                 }
                 break;
 
             case 2:
-                if (valor == 1) {
-                    if (e.grelha[li][ci] == VAZIA && e.grelha[li-1][ci+1] != VALOR_X && substituiAux(e,i,valor,l,c) == i)
+                if (e.peca == VALOR_X) {
+                    if (e.grelha[li][ci] == VAZIA && e.grelha[li-1][ci+1] != VALOR_X && substituiAux(e,i,l,c) == i)
                         r = 1;
                     break;
                 }
                 else {
-                    if (e.grelha[li][ci] == VAZIA && e.grelha[li-1][ci+1] != VALOR_O && substituiAux(e,i,valor,l,c) == i)
+                    if (e.grelha[li][ci] == VAZIA && e.grelha[li-1][ci+1] != VALOR_O && substituiAux(e,i,l,c) == i)
                         r = 1;
                 }
             break;
 
             case 3:
-                if (valor == 1) {
-                    if (e.grelha[li][ci] == VAZIA && e.grelha[li][ci+1] != VALOR_X && substituiAux(e,i,valor,l,c) == i)
+                if (e.peca == VALOR_X) {
+                    if (e.grelha[li][ci] == VAZIA && e.grelha[li][ci+1] != VALOR_X && substituiAux(e,i,l,c) == i)
                         r = 1;
                     break;
                 }
                 else {
-                    if (e.grelha[li][ci] == VAZIA && e.grelha[li][ci+1] != VALOR_O && substituiAux(e,i,valor,l,c) == i)
+                    if (e.grelha[li][ci] == VAZIA && e.grelha[li][ci+1] != VALOR_O && substituiAux(e,i,l,c) == i)
                         r = 1;
                 }
             break;
 
             case 4:
-                if (valor == 1) {
-                    if (e.grelha[li][ci] == VAZIA && e.grelha[li+1][ci+1] != VALOR_X && substituiAux(e,i,valor,l,c) == i)
+                if (e.peca == VALOR_X) {
+                    if (e.grelha[li][ci] == VAZIA && e.grelha[li+1][ci+1] != VALOR_X && substituiAux(e,i,l,c) == i)
                         r = 1;
                     break;
                 }
                 else {
-                    if (e.grelha[li][ci] == VAZIA && e.grelha[li+1][ci+1] != VALOR_O && substituiAux(e,i,valor,l,c) == i)
+                    if (e.grelha[li][ci] == VAZIA && e.grelha[li+1][ci+1] != VALOR_O && substituiAux(e,i,l,c) == i)
                         r = 1;
                 }
             break;
 
             case 5:
-                if (valor == 1) {
-                    if (e.grelha[li][ci] == VAZIA && e.grelha[li+1][ci] != VALOR_X && substituiAux(e,i,valor,l,c) == i)
+                if (e.peca == VALOR_X) {
+                    if (e.grelha[li][ci] == VAZIA && e.grelha[li+1][ci] != VALOR_X && substituiAux(e,i,l,c) == i)
                         r = 1;
                     break;
                 }
                 else {
-                    if (e.grelha[li][ci] == VAZIA && e.grelha[li+1][ci] != VALOR_O && substituiAux(e,i,valor,l,c) == i)
+                    if (e.grelha[li][ci] == VAZIA && e.grelha[li+1][ci] != VALOR_O && substituiAux(e,i,l,c) == i)
                         r = 1;
                 }
             break;
             case 6:
-                if (valor == 1) {
-                    if (e.grelha[li][ci] == VAZIA && e.grelha[li+1][ci-1] != VALOR_X && substituiAux(e,i,valor,l,c) == i)
+                if (e.peca == VALOR_X) {
+                    if (e.grelha[li][ci] == VAZIA && e.grelha[li+1][ci-1] != VALOR_X && substituiAux(e,i,l,c) == i)
                         r = 1;
                     break;
                 }
                 else {
-                    if (e.grelha[li][ci] == VAZIA && e.grelha[li+1][ci-1] != VALOR_O && substituiAux(e,i,valor,l,c) == i)
+                    if (e.grelha[li][ci] == VAZIA && e.grelha[li+1][ci-1] != VALOR_O && substituiAux(e,i,l,c) == i)
                         r = 1;
                 }
             break;
             case 7:
-                if (valor == 1) {
-                    if (e.grelha[li][ci] == VAZIA && e.grelha[li][ci-1] != VALOR_X && substituiAux(e,i,valor,l,c) == i)
+                if (e.peca == VALOR_X) {
+                    if (e.grelha[li][ci] == VAZIA && e.grelha[li][ci-1] != VALOR_X && substituiAux(e,i,l,c) == i)
                         r = 1;
                     break;
                 }
                 else {
-                    if (e.grelha[li][ci] == VAZIA && e.grelha[li][ci-1] != VALOR_O && substituiAux(e,i,valor,l,c) == i)
+                    if (e.grelha[li][ci] == VAZIA && e.grelha[li][ci-1] != VALOR_O && substituiAux(e,i,l,c) == i)
                         r = 1;
                 }
             break;
             case 8:
-                if (valor == 1) {
-                    if (e.grelha[li][ci] == VAZIA && e.grelha[li-1][ci-1] != VALOR_X && substituiAux(e,i,valor,l,c) == i)
+                if (e.peca == VALOR_X) {
+                    if (e.grelha[li][ci] == VAZIA && e.grelha[li-1][ci-1] != VALOR_X && substituiAux(e,i,l,c) == i)
                         r = 1;
                     break;
                 }
                 else {
-                    if (e.grelha[li][ci] == VAZIA && e.grelha[li-1][ci-1] != VALOR_O && substituiAux(e,i,valor,l,c) == i)
+                    if (e.grelha[li][ci] == VAZIA && e.grelha[li-1][ci-1] != VALOR_O && substituiAux(e,i,l,c) == i)
                         r = 1;
                 }
             break;
@@ -181,7 +181,7 @@ int possivelJogar (ESTADO e,int valor, int l, int c) { //0 == não é possivel j
 }
 
 
-void helpPlz (ESTADO e, int valor) {
+void helpPlz (ESTADO e) {
     int i,j;
     putchar ('\n');
     printf("  1 2 3 4 5 6 7 8\n");
@@ -191,7 +191,7 @@ void helpPlz (ESTADO e, int valor) {
             if (e.grelha[i][j] == VALOR_X) printf("X ");
             else if (e.grelha[i][j] == VALOR_O) printf("O ");
             else {
-                if (possivelJogar(e, valor, i + 1, j + 1) == 0) printf("- ");
+                if (possivelJogar(e, i + 1, j + 1) == 0) printf("- ");
                 else printf(". ");
             }
         }

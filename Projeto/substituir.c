@@ -3,12 +3,12 @@
 #include "auxiliares.h"
 #include "estado.h"
 
-int substituiAux (ESTADO e,int dir,int jog,int l,int c) {
+int substituiAux (ESTADO e,int dir,int l,int c) {
     int li = l - 1;
     int ci = c - 1;
     switch (dir) {
         case 1:
-            if (jog == 1) {
+            if (e.peca == VALOR_X) {
                 while (li != 0) {
                     if (e.grelha[li - 1][ci] == VAZIA) return 0;
                     if (e.grelha[li - 1][ci] == VALOR_X) return 1;
@@ -24,7 +24,7 @@ int substituiAux (ESTADO e,int dir,int jog,int l,int c) {
                 return 0;
             }
         case 2:
-            if (jog == 1) {
+            if (e.peca == VALOR_X) {
                 while (li != 0 && ci != 8) {
                     if (e.grelha[li - 1][ci+1] == VAZIA) return 0;
                     if (e.grelha[li - 1][ci+1] == VALOR_X) return 2;
@@ -46,7 +46,7 @@ int substituiAux (ESTADO e,int dir,int jog,int l,int c) {
                 return 0;
             }
         case 3:
-            if (jog == 1) {
+            if (e.peca == VALOR_X) {
                 while (ci != 8) {
                     if (e.grelha[li][ci+1] == VAZIA) return 0;
                     if (e.grelha[li][ci+1] == VALOR_X) return 3;
@@ -65,7 +65,7 @@ int substituiAux (ESTADO e,int dir,int jog,int l,int c) {
             li++;
             ci++;
             if (li == 8 || ci == 8) return 0;
-            if (jog == 1) {
+            if (e.peca == VALOR_X) {
                 while (li != 8 && ci != 8) {
                     if (e.grelha[li][ci] == VAZIA) return 0;
                     if (e.grelha[li][ci] == VALOR_X) return 4;
@@ -89,7 +89,7 @@ int substituiAux (ESTADO e,int dir,int jog,int l,int c) {
         case 5:
             li++;
             if (li == 8) return 0;
-            if (jog == 1) {
+            if (e.peca == VALOR_X) {
                 while (li != 8) {
                     if (e.grelha[li][ci] == VAZIA) return 0;
                     if (e.grelha[li][ci] == VALOR_X) return 5;
@@ -108,7 +108,7 @@ int substituiAux (ESTADO e,int dir,int jog,int l,int c) {
             li++;
             ci--;
             if (li == 8 || ci == 0) return 0;
-            if (jog == 1) {
+            if (e.peca == VALOR_X) {
                 while (li != 8 && ci != 0) {
                     if (e.grelha[li][ci] == VAZIA) return 0;
                     if (e.grelha[li][ci] == VALOR_X) return 6;
@@ -130,7 +130,7 @@ int substituiAux (ESTADO e,int dir,int jog,int l,int c) {
                 return 0;
             }
         case 7:
-            if (jog == 1) {
+            if (e.peca == VALOR_X) {
                 while (ci != 0) {
                     if (e.grelha[li][ci-1] == VAZIA) return 0;
                     if (e.grelha[li][ci-1] == VALOR_X) return 7;
@@ -146,7 +146,7 @@ int substituiAux (ESTADO e,int dir,int jog,int l,int c) {
                 return 0;
             }
         case 8:
-            if (jog == 1) {
+            if (e.peca == VALOR_X) {
                 while (li != 0 && ci != 0) {
                     if (e.grelha[li - 1][ci-1] == VAZIA) return 0;
                     if (e.grelha[li - 1][ci-1] == VALOR_X) return 8;
@@ -171,16 +171,16 @@ int substituiAux (ESTADO e,int dir,int jog,int l,int c) {
 }
 
 
-ESTADO substitui (ESTADO e,int peca,int l, int c) {
+ESTADO substitui (ESTADO e,int l, int c) {
     int li, ci, i;
     for (i = 1; i < 9; i++) {
         li = l - 1;
         ci = c - 1;
-        if (substituiAux(e, i, peca, l, c) == i) {
+        if (substituiAux(e, i,l, c) == i) {
             switch (i) {
                 case 1:
                     li--;
-                    if (peca == 1) {
+                    if (e.peca == VALOR_X) {
                         while (e.grelha[li][ci] != VALOR_X) {
                             e.grelha[li][ci] = VALOR_X;
                             li--;
@@ -194,7 +194,7 @@ ESTADO substitui (ESTADO e,int peca,int l, int c) {
                 case 2:
                     li--;
                     ci++;
-                    if (peca == 1) {
+                    if (e.peca == VALOR_X) {
                         while (e.grelha[li][ci] != VALOR_X) {
                             e.grelha[li][ci] = VALOR_X;
                             li--;
@@ -209,7 +209,7 @@ ESTADO substitui (ESTADO e,int peca,int l, int c) {
                     break;
                 case 3:
                     ci++;
-                    if (peca == 1) {
+                    if (e.peca == VALOR_X) {
                         while (e.grelha[li][ci] != VALOR_X) {
                             e.grelha[li][ci] = VALOR_X;
                             ci++;
@@ -223,7 +223,7 @@ ESTADO substitui (ESTADO e,int peca,int l, int c) {
                 case 4:
                     li++;
                     ci++;
-                    if (peca == 1) {
+                    if (e.peca == VALOR_X) {
                         while (e.grelha[li][ci] != VALOR_X && li < 8) {
                             e.grelha[li][ci] = VALOR_X;
                             li++;
@@ -239,7 +239,7 @@ ESTADO substitui (ESTADO e,int peca,int l, int c) {
 
                 case 5:
                    li++;
-                    if (peca == 1) {
+                    if (e.peca == VALOR_X) {
                         while (e.grelha[li][ci] != VALOR_X) {
                             e.grelha[li][ci] = VALOR_X;
                             li++;
@@ -254,7 +254,7 @@ ESTADO substitui (ESTADO e,int peca,int l, int c) {
                 case 6:
                     li++;
                     ci--;
-                    if (peca == 1) {
+                    if (e.peca == VALOR_X) {
                         while (e.grelha[li][ci] != VALOR_X) {
                             e.grelha[li][ci] = VALOR_X;
                             li++;
@@ -270,7 +270,7 @@ ESTADO substitui (ESTADO e,int peca,int l, int c) {
 
                 case 7:
                     ci--;
-                    if (peca == 1) {
+                    if (e.peca == VALOR_X) {
                         while (e.grelha[li][ci] != VALOR_X) {
                             e.grelha[li][ci] = VALOR_X;
                             ci--;
@@ -285,7 +285,7 @@ ESTADO substitui (ESTADO e,int peca,int l, int c) {
                 case 8:
                     li--;
                     ci--;
-                    if (peca == 1) {
+                    if (e.peca == VALOR_X) {
                         while (e.grelha[li][ci] != VALOR_X) {
                             e.grelha[li][ci] = VALOR_X;
                             li--;
