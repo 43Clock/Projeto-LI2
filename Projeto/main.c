@@ -17,9 +17,13 @@ ESTADO interface (ESTADO e) {
 
         case 'J':
             e = interfaceJ (e,buffer);
+            e = interfaceJAux(e);
            break;
-        case 'H':
+        case 'S':
             helpPlz(e);
+            break;
+        case 'E':
+            interfaceE(e,buffer);
             break;
         case 'Q':
             exit(0);
