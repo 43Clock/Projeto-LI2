@@ -25,10 +25,15 @@ ESTADO interface (ESTADO e) {
         case 'E':
             interfaceE(e,buffer);
             break;
+        case 'L':
+            e = interfaceL(e,buffer);
+            break;
         case 'Q':
             exit(0);
-
-
+            break;
+        default:
+            printf("Comando Inválido\n");
+            break;
     }
     return e;
 }

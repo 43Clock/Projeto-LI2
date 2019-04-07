@@ -72,11 +72,11 @@ ESTADO interfaceJAux (ESTADO e) {
 
 void interfaceE(ESTADO e,char buffer[]) {
     FILE *fptr;
-    int i, j,l,c;
+    int i = 2, j,l,c;
     char nome[100];
     char modo;
     char jogador;
-    for (i = 0; buffer[i] == 'E' || buffer[i] == 'e' || buffer[i] == ' '; i++);
+    //for (i = 0; buffer[i] == 'E' || buffer[i] == 'e' || buffer[i] == ' '; i++);
     for (j = 0; buffer[i] != '\n' && buffer[i] != '\0'; i++, j++) {
         if (buffer[i] == ' ') nome[j] = '_';
         else nome[j] = buffer[i];
@@ -100,4 +100,52 @@ void interfaceE(ESTADO e,char buffer[]) {
         fprintf(fptr,"\n");
     }
     fclose(fptr);
+}
+
+ESTADO interfaceL(ESTADO e,char buffer[]) {
+    FILE *fptr;
+    int i = 2, j,l = 0,c = 0;
+    char nome[100];
+    char linha[100];
+    char modo;
+    char jogador;
+    //for (i = 0; buffer[i] == 'L' || buffer[i] == 'l' || buffer[i] == ' '; i++);
+    for (j = 0; buffer[i] != '\n' && buffer[i] != '\0'; i++, j++) {
+        if (buffer[i] == ' ') nome[j] = '_';
+        else nome[j] = buffer[i];
+    }
+    nome[j] = '\0';
+    strcat(nome, ".txt");
+    fptr = fopen(nome,"r");
+    if (fptr == NULL) {printf("Não existe esse save!!!\n");return e;}
+    fscanf(fptr,"%c %c",&modo,&jogador);
+    if (jogador == 'X') e.peca = VALOR_X;
+    else if (jogador == 'O') e.peca = VALOR_O;
+    else e.peca = VAZIA;
+    if (modo == 'M') e.modo = 0;
+    else e.modo = 1;
+    fseek(fptr,1,SEEK_CUR);
+    for (i = 0;i<8;i++) {
+        fgets(linha,100,fptr);
+        c = 0;
+        for (j = 0; linha[j] != '\n' && c < 8; j++) {
+            if (linha[j] == 'X') {
+                e.grelha[i][c] = VALOR_X;
+                c++;
+            }
+            else if (linha[j] == 'O') {
+                e.grelha[i][c] = VALOR_O;
+                c++;
+            }
+            else if (linha[j] == '-' || linha[j] == '.'){
+                e.grelha[i][c] = VAZIA;
+                c++;
+            }
+        }
+    }
+    fclose(fptr);
+    printf("\n");
+    printa(e);
+    printf("\n");
+    return e;
 }

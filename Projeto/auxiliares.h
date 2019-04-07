@@ -15,6 +15,7 @@ ESTADO interfaceN (ESTADO e, char buffer []);
 ESTADO interfaceJ (ESTADO e, char buffer []);
 ESTADO interfaceJAux (ESTADO e);
 void interfaceE(ESTADO e,char buffer[]);
+ESTADO interfaceL(ESTADO e,char buffer[]);
 int acabou(ESTADO e);
 int podeJogar (ESTADO e);
 
