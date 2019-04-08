@@ -151,3 +151,27 @@ int podeJogar (ESTADO e) {
             if  (possivelJogar(e,i+1,j+1)) r = 1;
     return  r;
 }
+
+void initStack (ESTADO e,STACK *s) {
+    s->sp = 0;
+    s->valores[s->sp] = e;
+}
+
+int isEmpty (STACK *s) {
+    return (s->sp == 0);
+}
+
+void push (ESTADO e,STACK *s) {
+    s->sp++;
+    s->valores[s->sp] = e;
+}
+
+ESTADO pop (ESTADO e,STACK *s) {
+    s->sp--;
+    e = s->valores[s->sp];
+    printf("\n");
+    printa(e);
+    printf("\n");
+    return e;
+}
+

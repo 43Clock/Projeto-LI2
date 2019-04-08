@@ -48,10 +48,10 @@ RM = /home/luis43/CLion/clion-2019.1/bin/cmake/linux/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/luis43/CLionProjects/Projeto/Projeto
+CMAKE_SOURCE_DIR = /home/luis43/CLionProjects/Projeto-LI2/Projeto
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/luis43/CLionProjects/Projeto/Projeto/cmake-build-debug
+CMAKE_BINARY_DIR = /home/luis43/CLionProjects/Projeto-LI2/Projeto/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/luis43/CLionProjects/Projeto/Projeto/cmake-build-debug/CMakeFiles /home/luis43/CLionProjects/Projeto/Projeto/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/luis43/CLionProjects/Projeto-LI2/Projeto/cmake-build-debug/CMakeFiles /home/luis43/CLionProjects/Projeto-LI2/Projeto/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/luis43/CLionProjects/Projeto/Projeto/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/luis43/CLionProjects/Projeto-LI2/Projeto/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -122,6 +122,33 @@ proj: cmake_check_build_system
 proj/fast:
 	$(MAKE) -f CMakeFiles/proj.dir/build.make CMakeFiles/proj.dir/build
 .PHONY : proj/fast
+
+Interface.o: Interface.c.o
+
+.PHONY : Interface.o
+
+# target to build an object file
+Interface.c.o:
+	$(MAKE) -f CMakeFiles/proj.dir/build.make CMakeFiles/proj.dir/Interface.c.o
+.PHONY : Interface.c.o
+
+Interface.i: Interface.c.i
+
+.PHONY : Interface.i
+
+# target to preprocess a source file
+Interface.c.i:
+	$(MAKE) -f CMakeFiles/proj.dir/build.make CMakeFiles/proj.dir/Interface.c.i
+.PHONY : Interface.c.i
+
+Interface.s: Interface.c.s
+
+.PHONY : Interface.s
+
+# target to generate assembly for a file
+Interface.c.s:
+	$(MAKE) -f CMakeFiles/proj.dir/build.make CMakeFiles/proj.dir/Interface.c.s
+.PHONY : Interface.c.s
 
 auxiliares.o: auxiliares.c.o
 
@@ -240,6 +267,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... proj"
 	@echo "... edit_cache"
+	@echo "... Interface.o"
+	@echo "... Interface.i"
+	@echo "... Interface.s"
 	@echo "... auxiliares.o"
 	@echo "... auxiliares.i"
 	@echo "... auxiliares.s"

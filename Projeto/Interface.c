@@ -4,7 +4,7 @@
 #include "estado.h"
 #include "auxiliares.h"
 
-ESTADO interfaceN (ESTADO e, char buffer []) {
+ESTADO interfaceN (ESTADO e, char buffer [],STACK *s) {
     int i;
     e =reset(e);
     for (i = 0;buffer[i] == ' ' || buffer[i] == 'N' || buffer[i] == 'n';i++ );
@@ -22,11 +22,12 @@ ESTADO interfaceN (ESTADO e, char buffer []) {
         printf("\n");
     }
     else e.peca = VAZIA;
+    initStack(e,s);
     return e;
 
 }
 
-ESTADO interfaceJ (ESTADO e, char buffer []){
+ESTADO interfaceJ (ESTADO e, char buffer [],STACK *s){
     int i,l,cl;
     if (e.peca != VAZIA) {
         //Vai verificar se a peca foi colocada e se tal aconteceu vai avancar para o prox jogador
@@ -42,6 +43,7 @@ ESTADO interfaceJ (ESTADO e, char buffer []){
             e = substitui(e, l, cl);
             if (e.peca == VALOR_X) e.peca = VALOR_O;
             else e.peca = VALOR_X;
+            push(e,s);
             printf("\n");
             printa(e);
             printf("\n");

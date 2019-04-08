@@ -3,6 +3,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/proj.dir/estado.c.o"
   "CMakeFiles/proj.dir/auxiliares.c.o"
   "CMakeFiles/proj.dir/substituir.c.o"
+  "CMakeFiles/proj.dir/Interface.c.o"
   "proj.pdb"
   "proj"
 )

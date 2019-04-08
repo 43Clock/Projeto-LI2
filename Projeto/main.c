@@ -5,19 +5,20 @@
 #include "auxiliares.h"
 
 
-ESTADO interface (ESTADO e) {
+ESTADO interface (ESTADO e, STACK *s) {
     char n;
+    int i;
     char buffer[100];
     fgets(buffer,100,stdin);
     n = buffer[0];
     switch (toupper(n)) {
         case 'N':
-            e = interfaceN(e,buffer);
+            e = interfaceN(e,buffer,s);
             break;
 
         case 'J':
-            e = interfaceJ (e,buffer);
-            e = interfaceJAux(e);
+            e = interfaceJ (e,buffer,s);
+           // e = interfaceJAux(e);
            break;
         case 'S':
             helpPlz(e);
@@ -28,8 +29,9 @@ ESTADO interface (ESTADO e) {
         case 'L':
             e = interfaceL(e,buffer);
             break;
-        case 'Q':
-            exit(0);
+        case 'U':
+            if (isEmpty(s) == 0) e = pop(e,s);
+            else printf("Não é possivel reverte a jogada!!!!!\n\n");
             break;
         default:
             printf("Comando Inválido\n");
@@ -55,8 +57,9 @@ void print_prompt(ESTADO e) {
 int main() {
     ESTADO e = {0};
     opcoes();
+    STACK s;
     while (1){
         print_prompt(e);
-        e = interface(e);
+        e = interface(e,&s);
     }
 }
