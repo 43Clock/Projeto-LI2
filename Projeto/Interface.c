@@ -55,18 +55,18 @@ ESTADO interfaceJ (ESTADO e, char buffer [],STACK *s){
 
 ESTADO interfaceJAux (ESTADO e) {
     if (acabou(e) == 0){
-        if (conta (e,VALOR_X)>conta(e,VALOR_O) && e.grelha[4][4] != VAZIA) printf("************************\n**O Jogador *X* ganhou**\n************************\n\n");
+        if (conta (e,VALOR_X)>conta(e,VALOR_O) && e.grelha[4][4] != VAZIA) printf("************************\n**O Jogador *Senhor engenheiro X* ganhou**\n************************\n\n");
         else if (conta (e,VALOR_X)<conta(e,VALOR_O) && e.grelha[4][4] != VAZIA) printf("************************\n**O Jogador *O* ganhou**\n************************\n\n");
         else if (conta (e,VALOR_X)==conta(e,VALOR_O) && e.grelha[4][4] != VAZIA)printf("************************\n*********Empate*********\n************************\n\n");
         e.peca = VAZIA;
         e = reset (e);
     }
     else if (podeJogar(e) == 0 && e.peca == VALOR_X) {
-        printf("Jogador X não consegue jogar. Turno passa para jogador O");
+        printf("Jogador X não consegue jogar. Turno passa para jogador O\n\n");
         e.peca = VALOR_O;
     }
     else if (podeJogar(e) == 0 && e.peca == VALOR_O) {
-        printf("Jogador O não consegue jogar. Turno passa para jogador X");
+        printf("Jogador O não consegue jogar. Turno passa para jogador X\n\n");
         e.peca = VALOR_X;
     }
     return  e;

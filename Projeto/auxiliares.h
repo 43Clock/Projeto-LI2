@@ -27,8 +27,9 @@ int acabou(ESTADO e);
 int podeJogar (ESTADO e);
 
 void helpPlz (ESTADO e);
+void helpPlz2 (ESTADO e);
 
-void initStack (ESTADO e,STACK *s);
+        void initStack (ESTADO e,STACK *s);
 int isEmpty (STACK *s);
 void push (ESTADO e,STACK *s);
 ESTADO pop (ESTADO e,STACK *s);

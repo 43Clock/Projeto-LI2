@@ -18,10 +18,13 @@ ESTADO interface (ESTADO e, STACK *s) {
 
         case 'J':
             e = interfaceJ (e,buffer,s);
-           // e = interfaceJAux(e);
+            e = interfaceJAux(e);
            break;
         case 'S':
             helpPlz(e);
+            break;
+        case 'H':
+            helpPlz2(e);
             break;
         case 'E':
             interfaceE(e,buffer);
