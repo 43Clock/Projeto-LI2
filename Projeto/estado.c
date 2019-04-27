@@ -2,6 +2,7 @@
 // Created by pja on 28/02/2019.
 //
 #include <stdio.h>
+#include "auxiliares.h"
 #include "estado.h"
 
 
@@ -34,6 +35,6 @@ void printa(ESTADO e)
         }
         printf("\n");
     }
-
+    printf("\n   X: %d   O: %d\n",conta(e,VALOR_X),conta(e,VALOR_O));
 }
 

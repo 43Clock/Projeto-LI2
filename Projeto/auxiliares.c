@@ -125,6 +125,27 @@ void helpPlz (ESTADO e) {
     }
 }
 
+void helpPlz2 (ESTADO e) {
+    int i,j,r = 0;
+    putchar ('\n');
+    printf("  1 2 3 4 5 6 7 8\n");
+    for (i = 0;i<8;i++) {
+        printf("%d ",i+1);
+        for (j = 0; j < 8; j++) {
+            if (e.grelha[i][j] == VALOR_X) printf("X ");
+            else if (e.grelha[i][j] == VALOR_O) printf("O ");
+            else {
+                if (possivelJogar(e, i + 1, j + 1) == 1 && r == 0) {
+                    printf("? ");
+                    r++;
+                }
+                else printf("- ");
+            }
+        }
+        putchar('\n');
+    }
+}
+
 int acabou (ESTADO e) { // 0 == não ha jogadas possiveis
     int r = 0;
     int i,j;
@@ -153,22 +174,25 @@ int podeJogar (ESTADO e) {
 }
 
 void initStack (ESTADO e,STACK *s) {
-    s->sp = 0;
-    s->valores[s->sp] = e;
+    *s = NULL;
 }
 
 int isEmpty (STACK *s) {
-    return (s->sp == 0);
+    return (*s == NULL || (*s) -> ant == NULL);
 }
 
 void push (ESTADO e,STACK *s) {
-    s->sp++;
-    s->valores[s->sp] = e;
+    STACK novo = (STACK) malloc(sizeof(struct stack));
+    novo -> e = e;
+    novo -> ant = *s;
+    *s = novo;
 }
 
 ESTADO pop (ESTADO e,STACK *s) {
-    s->sp--;
-    e = s->valores[s->sp];
+    STACK aux = *s;
+    aux = aux -> ant;
+    e = aux -> e;
+    *s = aux;
     printf("\n");
     printa(e);
     printf("\n");

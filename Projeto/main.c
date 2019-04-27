@@ -5,7 +5,7 @@
 #include "auxiliares.h"
 
 
-ESTADO interface (ESTADO e, STACK *s) {
+ESTADO interface (ESTADO e, STACK *s,POSICOES *p) {
     char n;
     int i;
     char buffer[100];
@@ -17,11 +17,15 @@ ESTADO interface (ESTADO e, STACK *s) {
             break;
 
         case 'J':
-            e = interfaceJ (e,buffer,s);
-           // e = interfaceJAux(e);
+            e = interfaceJ (e,buffer,s,p);
+            //printf ("%d\n",podeJogar(e));
+            e = interfaceJAux(e);
            break;
         case 'S':
             helpPlz(e);
+            break;
+        case 'H':
+            helpPlz2(e);
             break;
         case 'E':
             interfaceE(e,buffer);
@@ -32,6 +36,9 @@ ESTADO interface (ESTADO e, STACK *s) {
         case 'U':
             if (isEmpty(s) == 0) e = pop(e,s);
             else printf("Não é possivel reverte a jogada!!!!!\n\n");
+            break;
+        case 'A':
+            e = interfaceA(e,buffer,s);
             break;
         default:
             printf("Comando Inválido\n");
@@ -58,8 +65,9 @@ int main() {
     ESTADO e = {0};
     opcoes();
     STACK s;
+    POSICOES p;
     while (1){
         print_prompt(e);
-        e = interface(e,&s);
+        e = interface(e,&s,&p);
     }
 }
