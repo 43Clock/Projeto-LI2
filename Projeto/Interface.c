@@ -4,6 +4,13 @@
 #include "estado.h"
 #include "auxiliares.h"
 
+/**
+ * @brief Esta função é utilizada para começar um novo jogo, sendo o primeiro jogador a jogar o que foi escolhido no input.
+ * @param e Estado atual do jogo para que possa ser resetado e escolhido o primeiro jogador assim como o modo.
+ * @param buffer Um array de caracteres correspondente ao input que se fez para executar esta função.
+ * @param s Uma stack de listas ligadas para se registar as jogadas feita para que posteriormente seja possivel fazer undo às jogadas.
+ * @return Retorna o novo estado de jogo com o proximo jogador a jogar.
+ */
 ESTADO interfaceN (ESTADO e, char buffer [],STACK *s) {
     int i;
     e =reset(e);
@@ -32,12 +39,13 @@ ESTADO interfaceN (ESTADO e, char buffer [],STACK *s) {
 
 ESTADO interfaceA (ESTADO e, char buffer [],STACK *s) {
     int i;
+    int d;
     e = reset(e);
     for (i = 0;buffer[i] == ' ' || buffer[i] == 'A' || buffer[i] == 'a';i++ );
     char c = buffer[i];
    // i++;
     //for (;buffer[i] == ' ';i++);
-    char d = buffer[i];
+    //char d = buffer[i];
     if (c == 'X' || c == 'x') {
         e.peca = VALOR_X;
         printf("\n");
@@ -51,13 +59,15 @@ ESTADO interfaceA (ESTADO e, char buffer [],STACK *s) {
         printf("\n");
     }
     else if (c == 'O' || c == 'o' ){
-        e.peca = VALOR_O;
+        e.peca = VALOR_X;
         printf("\n");
         printa(e);
         printf("\n");
     }
     else e.peca = VAZIA;
-    e.modo  = 1;
+    for (i = 0;buffer[i] == ' ' || toupper(buffer[i]) == 'A'|| toupper(buffer[i]) == 'X'|| toupper(buffer[i]) == 'O';i++);
+    d = buffer[i] -'0';
+    e.modo  = d;
     initStack(e,s);
     push(e,s);
     return e;
@@ -94,15 +104,15 @@ ESTADO interfaceJ (ESTADO e, char buffer [],STACK *s,POSICOES *p){
             cl = buffer[i] - 48;
             if (possivelJogar(e, l, cl) == 0) printf("Jogada impossivel!!!!\n\n");
             else {
-                //Vai executar a funcao e colocar uma peca no lugar
                 e = jogar(e, buffer);
                 e = substitui(e, l, cl);
                 if (e.peca == VALOR_X) e.peca = VALOR_O;
                 else e.peca = VALOR_X;
                 printf("\n");
                 printa(e);
-                listaPosicoes(e, p);
-                e = bot1(e, p);
+                listaPosicoes(e,p);
+                if (e.modo == 1) e = bot1(e, p);
+                else e = bot2(e,e.modo,p);
                 push(e, s);
             }
         }

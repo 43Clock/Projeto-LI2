@@ -14,6 +14,8 @@ ESTADO interface (ESTADO e, STACK *s,POSICOES *p) {
     switch (toupper(n)) {
         case 'N':
             e = interfaceN(e,buffer,s);
+            VALOR bot = VALOR_X;
+            printf("%d\n",bot == e.peca);
             break;
 
         case 'J':

@@ -55,5 +55,7 @@ ESTADO bot1 (ESTADO e,POSICOES *p);
 ESTADO jogaBot (ESTADO e,int l, int c);
 void listaPosicoes (ESTADO e,POSICOES *p);
 int pontos_pos (int l,int c);
+int pontos(ESTADO e,VALOR bot);
+ESTADO bot2 (ESTADO e,int c,POSICOES *p);
 
 #endif //PROJ_AUXILIARES_H

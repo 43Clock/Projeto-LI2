@@ -148,27 +148,6 @@ void helpPlz2 (ESTADO e) { // sugestão de jogada
     putchar('\n');
 }
 
-void helpPlz2 (ESTADO e) {
-    int i,j,r = 0;
-    putchar ('\n');
-    printf("  1 2 3 4 5 6 7 8\n");
-    for (i = 0;i<8;i++) {
-        printf("%d ",i+1);
-        for (j = 0; j < 8; j++) {
-            if (e.grelha[i][j] == VALOR_X) printf("X ");
-            else if (e.grelha[i][j] == VALOR_O) printf("O ");
-            else {
-                if (possivelJogar(e, i + 1, j + 1) == 1 && r == 0) {
-                    printf("? ");
-                    r++;
-                }
-                else printf("- ");
-            }
-        }
-        putchar('\n');
-    }
-}
-
 int acabou (ESTADO e) { // 0 == não ha jogadas possiveis
     int r = 0;
     int i,j;
