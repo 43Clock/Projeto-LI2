@@ -11,17 +11,17 @@ ESTADO interface (ESTADO e, STACK *s,POSICOES *p) {
     char buffer[100];
     fgets(buffer,100,stdin);
     n = buffer[0];
+    VALOR bot;
     switch (toupper(n)) {
         case 'N':
             e = interfaceN(e,buffer,s);
-            VALOR bot = VALOR_X;
-            printf("%d\n",bot == e.peca);
+//            printf("%d\n",bot == e.peca);
             break;
 
         case 'J':
-            e = interfaceJ (e,buffer,s,p);
+            e = interfaceJ (e,buffer,s,p,&bot);
             //printf ("%d\n",podeJogar(e));
-            e = interfaceJAux(e);
+            e = interfaceJAux(e,&bot,p);
            break;
         case 'S':
             helpPlz(e);
@@ -33,15 +33,19 @@ ESTADO interface (ESTADO e, STACK *s,POSICOES *p) {
             interfaceE(e,buffer);
             break;
         case 'L':
-            e = interfaceL(e,buffer);
+            e = interfaceL(e,buffer,&bot);
+            initStack(e,s);
+            push(e,s);
             break;
         case 'U':
             if (isEmpty(s) == 0) e = pop(e,s);
             else printf("Não é possivel reverte a jogada!!!!!\n\n");
             break;
         case 'A':
-            e = interfaceA(e,buffer,s);
+            e = interfaceA(e,buffer,s,&bot);
             break;
+        case 'Q':
+            exit(0);
         default:
             printf("Comando Inválido\n");
             break;

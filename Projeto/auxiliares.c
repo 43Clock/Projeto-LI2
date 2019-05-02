@@ -21,10 +21,10 @@ ESTADO reset (ESTADO e){
     for (i = 0;i<8;i++)
         for (j = 0;j<8;j++)
             e.grelha[i][j] = VAZIA;
-    e.grelha[3][4] = VALOR_O;
-    e.grelha[4][3] = VALOR_O;
-    e.grelha[3][3] = VALOR_X;
-    e.grelha[4][4] = VALOR_X;
+    e.grelha[3][4] = VALOR_X;
+    e.grelha[4][3] = VALOR_X;
+    e.grelha[3][3] = VALOR_O;
+    e.grelha[4][4] = VALOR_O;
     return e;
 }
 
@@ -175,7 +175,7 @@ int podeJogar (ESTADO e) {
     return  r;
 }
 
-void initStack (ESTADO e,STACK *s) {
+void initStack (ESTADO e,STACK *s) { // Falta fazer a parte do free;
     *s = NULL;
 }
 

@@ -37,9 +37,9 @@ ESTADO interfaceN (ESTADO e, char buffer [],STACK *s) {
 
 }
 
-ESTADO interfaceA (ESTADO e, char buffer [],STACK *s) {
+ESTADO interfaceA (ESTADO e, char buffer [],STACK *s,VALOR *bot) {
     int i;
-    int d;
+    char d;
     e = reset(e);
     for (i = 0;buffer[i] == ' ' || buffer[i] == 'A' || buffer[i] == 'a';i++ );
     char c = buffer[i];
@@ -47,18 +47,20 @@ ESTADO interfaceA (ESTADO e, char buffer [],STACK *s) {
     //for (;buffer[i] == ' ';i++);
     //char d = buffer[i];
     if (c == 'X' || c == 'x') {
+        *bot = VALOR_X;
         e.peca = VALOR_X;
         printf("\n");
         printa(e);
         printf("\n");
-        e = jogaBot (e,3,5);
-        e = substitui(e,3,5);
+        e = jogaBot (e,3,4);
+        e = substitui(e,3,4);
         e.peca = VALOR_O;
         printf("\n");
         printa(e);
         printf("\n");
     }
     else if (c == 'O' || c == 'o' ){
+        *bot = VALOR_O;
         e.peca = VALOR_X;
         printf("\n");
         printa(e);
@@ -66,7 +68,7 @@ ESTADO interfaceA (ESTADO e, char buffer [],STACK *s) {
     }
     else e.peca = VAZIA;
     for (i = 0;buffer[i] == ' ' || toupper(buffer[i]) == 'A'|| toupper(buffer[i]) == 'X'|| toupper(buffer[i]) == 'O';i++);
-    d = buffer[i] -'0';
+    d = buffer[i];
     e.modo  = d;
     initStack(e,s);
     push(e,s);
@@ -74,8 +76,9 @@ ESTADO interfaceA (ESTADO e, char buffer [],STACK *s) {
 
 }
 
-ESTADO interfaceJ (ESTADO e, char buffer [],STACK *s,POSICOES *p){
+ESTADO interfaceJ (ESTADO e, char buffer [],STACK *s,POSICOES *p,VALOR *bot){
     int i,l,cl;
+    VALOR v = *bot;
     if (e.peca != VAZIA) {
         if (e.modo == 0) {
             //Vai verificar se a peca foi colocada e se tal aconteceu vai avancar para o prox jogador
@@ -111,8 +114,10 @@ ESTADO interfaceJ (ESTADO e, char buffer [],STACK *s,POSICOES *p){
                 printf("\n");
                 printa(e);
                 listaPosicoes(e,p);
-                if (e.modo == 1) e = bot1(e, p);
-                else e = bot2(e,e.modo,p);
+                //if (v == e.peca) {
+                    if (e.modo == '1') e = bot1(e, p);
+                    else e = bot2(e, e.modo, p);
+                //}
                 push(e, s);
             }
         }
@@ -121,7 +126,10 @@ ESTADO interfaceJ (ESTADO e, char buffer [],STACK *s,POSICOES *p){
     return e;
 }
 
-ESTADO interfaceJAux (ESTADO e) { // Fazar load do game.txt e tentar resolver o bug de passar a jogada.
+ESTADO interfaceJAux (ESTADO e,VALOR *bot,POSICOES *p) { // Fazar load do game.txt e tentar resolver o bug de passar a jogada.
+    VALOR v;
+    if (*bot == VALOR_X) v = VALOR_O;
+    else v = VALOR_X;
     if (acabou(e) == 0){
         if (conta (e,VALOR_X)>conta(e,VALOR_O) && e.grelha[4][4] != VAZIA) printf("************************\n**O Jogador *X* ganhou**\n************************\n\n");
         else if (conta (e,VALOR_X)<conta(e,VALOR_O) && e.grelha[4][4] != VAZIA) printf("************************\n**O Jogador *O* ganhou**\n************************\n\n");
@@ -129,13 +137,39 @@ ESTADO interfaceJAux (ESTADO e) { // Fazar load do game.txt e tentar resolver o 
         e.peca = VAZIA;
         e = reset (e);
     }
-    else if (podeJogar(e) == 0 && e.peca == VALOR_X) {
-        printf("Jogador X não consegue jogar. Turno passa para jogador O\n");
-        e.peca = VALOR_O;
+    else if (podeJogar(e) == 0 && e.peca == VALOR_X && e.modo > '0') {
+        if (e.peca == *bot) {
+            printf("O bot não consegue jogar. Turno passa para jogador O\n");
+            e.peca = VALOR_O;
+        }
+        else {
+            printf("O Jogador X não consegue jogar. Turno passado para o bot\n");
+            e.peca = *bot;
+            listaPosicoes(e, p);
+            e = bot2(e, e.modo, p);
+            //e.peca = v;
+        }
+    }
+    else if (podeJogar(e) == 0 && e.peca == VALOR_O && e.modo > '0') {
+        if (e.peca == *bot) {
+            printf("O bot não consegue jogar. Turno passa para jogador O\n"); 
+            e.peca = VALOR_X;
+        }
+        else {
+            printf("O Jogador X não consegue jogar. Turno passado para o bot\n");
+            e.peca = *bot;
+            listaPosicoes(e, p);
+            e = bot2(e, e.modo, p);
+            //e.peca = v;
+        }
     }
     else if (podeJogar(e) == 0 && e.peca == VALOR_O) {
         printf("Jogador O não consegue jogar. Turno passa para jogador X\n");
         e.peca = VALOR_X;
+    }
+    else if (podeJogar(e) == 0 && e.peca == VALOR_X){
+        printf("Jogador X não consegue jogar. Turno passa para jogador X\n");
+        e.peca = VALOR_O;
     }
     return  e;
 }
@@ -158,7 +192,8 @@ void interfaceE(ESTADO e,char buffer[]) {
     if (e.peca == VALOR_X) jogador = 'X';
     else if (e.peca == VALOR_O) jogador = 'O';
     else jogador = '?';
-    fprintf(fptr,"%c %c\n",modo,jogador);
+    if (modo == 'A') fprintf(fptr,"%c %c %c\n",modo,jogador,e.modo);
+    else fprintf(fptr,"%c %c\n",modo,jogador);
     for (l = 0;l<8;l++){
         for (c = 0;c<8;c++) {
             if (e.grelha[l][c] == VALOR_X) fprintf(fptr,"X ");
@@ -171,12 +206,12 @@ void interfaceE(ESTADO e,char buffer[]) {
     printf("\nJogo guardado com sucesso!!\n");
 }
 
-ESTADO interfaceL(ESTADO e,char buffer[]) {
+ESTADO interfaceL(ESTADO e,char buffer[],VALOR *bot) {
     FILE *fptr;
     int i = 2, j,l = 0,c = 0;
     char nome[100];
     char linha[100];
-    char modo;
+    char modo,bots;
     char jogador;
     //for (i = 0; buffer[i] == 'L' || buffer[i] == 'l' || buffer[i] == ' '; i++);
     for (j = 0; buffer[i] != '\n' && buffer[i] != '\0'; i++, j++) {
@@ -186,12 +221,23 @@ ESTADO interfaceL(ESTADO e,char buffer[]) {
     nome[j] = '\0';
     fptr = fopen(nome,"r");
     if (fptr == NULL) {printf("Não existe esse save!!!\n");return e;}
-    fscanf(fptr,"%c %c",&modo,&jogador);
-    if (jogador == 'X') e.peca = VALOR_X;
-    else if (jogador == 'O') e.peca = VALOR_O;
-    else e.peca = VAZIA;
-    if (modo == 'M') e.modo = 0;
-    else e.modo = 1;
+    fscanf(fptr,"%c ",&modo);
+    if (modo == 'M'){
+        fscanf(fptr,"%c",&jogador);
+        if (jogador == 'X') e.peca = VALOR_X;
+        else if (jogador == 'O') e.peca = VALOR_O;
+        else e.peca = VAZIA;
+        e.modo = '0';
+    }
+    else {
+        fscanf(fptr,"%c %c",&jogador, &bots);
+        *bot = bots;
+        if (jogador == 'X') e.peca = VALOR_X;
+        else if (jogador == 'O') e.peca = VALOR_O;
+        else e.peca = VAZIA;
+        e.modo = bot;
+
+    }
     fseek(fptr,1,SEEK_CUR);
     for (i = 0;i<8;i++) {
         fgets(linha,100,fptr);

@@ -22,10 +22,10 @@ typedef struct posicoes {
 
 //Funçoes para fazer os comandos
 ESTADO interfaceN (ESTADO e, char buffer [],STACK *s);
-ESTADO interfaceJ (ESTADO e, char buffer [],STACK *s,POSICOES *p);
-ESTADO interfaceJAux (ESTADO e);
-ESTADO interfaceA (ESTADO e, char buffer [],STACK *s);
-ESTADO interfaceL(ESTADO e,char buffer[]);
+ESTADO interfaceJ (ESTADO e, char buffer [],STACK *s,POSICOES *p,VALOR *bot);
+ESTADO interfaceJAux (ESTADO e,VALOR *bot,POSICOES *p);
+ESTADO interfaceA (ESTADO e, char buffer [],STACK *s,VALOR *bot);
+ESTADO interfaceL(ESTADO e,char buffer[],VALOR *bot);
 void interfaceE(ESTADO e,char buffer[]);
 void helpPlz (ESTADO e);
 void helpPlz2 (ESTADO e);
@@ -56,6 +56,6 @@ ESTADO jogaBot (ESTADO e,int l, int c);
 void listaPosicoes (ESTADO e,POSICOES *p);
 int pontos_pos (int l,int c);
 int pontos(ESTADO e,VALOR bot);
-ESTADO bot2 (ESTADO e,int c,POSICOES *p);
+ESTADO bot2 (ESTADO e,char c,POSICOES *p);
 
 #endif //PROJ_AUXILIARES_H

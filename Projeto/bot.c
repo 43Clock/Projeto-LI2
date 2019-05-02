@@ -80,7 +80,7 @@ int conta_mob (ESTADO e,VALOR a) {
     return r;
 }
 
-int minmax (ESTADO e,int depth,POSICOES *p,VALOR bot,POSICAO *final) {
+int minmax (ESTADO e,int depth,int original,POSICOES *p,VALOR bot,POSICAO *final) {
     VALOR v;
     ESTADO e_tmp;
     int max,min,i,aval;
@@ -92,7 +92,7 @@ int minmax (ESTADO e,int depth,POSICOES *p,VALOR bot,POSICAO *final) {
     if (depth == 0) return pontos(e,bot);
 
     if (bot == e.peca) {
-        if (depth == 3) max = -10000;
+        max = -10000;
         e_tmp = e;
         for (i = 0;i<p->sp;i++) {
             e = e_tmp;
@@ -101,18 +101,20 @@ int minmax (ESTADO e,int depth,POSICOES *p,VALOR bot,POSICAO *final) {
             if (e.peca == VALOR_X) e.peca = VALOR_O;
             else e.peca = VALOR_X;
             listaPosicoes(e, &s);
-            aval = minmax(e, depth - 1, &s, bot,final);
+            aval = minmax(e, depth - 1,original, &s, bot,final);
             if (aval > max) {
                 max = aval;
-                final->l = p->valores[p->sp].l;
-                final->c = p->valores[p->sp].c;
+                if (depth == original) {
+                    final->l = p->valores[i].l;
+                    final->c = p->valores[i].c;
+                }
             }
-            printf("%d %d %d\n",max,final->l,final->c);
+            //printf("%d %d %d\n",max,final->l,final->c);
         }
         return max;
     }
     else {
-        if (depth == 3)min = 10000;
+        min = 10000;
         e_tmp = e;
         for (i = 0;i<p->sp;i++) {
             e = e_tmp;
@@ -121,7 +123,7 @@ int minmax (ESTADO e,int depth,POSICOES *p,VALOR bot,POSICAO *final) {
             if (e.peca == VALOR_X) e.peca = VALOR_O;
             else e.peca = VALOR_X;
             listaPosicoes(e, &s);
-            aval = minmax(e, depth - 1, &s, bot,final);
+            aval = minmax(e, depth - 1,original, &s, bot,final);
             if (aval < min) min = aval;
         }
         return min;
@@ -143,15 +145,17 @@ int pontos(ESTADO e,VALOR bot) {
     return h1+50*h2+100*h3;
 }
 
-ESTADO bot2 (ESTADO e,int c,POSICOES *p) {
+ESTADO bot2 (ESTADO e,char c,POSICOES *p) {
     POSICAO final;
-    int i,r;
-    r = minmax(e,(c*2)-1,p,e.peca,&final);
-    e = jogaBot(e,final.l,final.c);
-    e = substitui(e,final.l,final.c);
+    VALOR bot = e.peca;
+    int cd = c - '0';
+    int i, r;
+    r = minmax(e, (cd * 2) + 1, (cd * 2) + 1, p, e.peca, &final);
+    e = jogaBot(e, final.l, final.c);
+    e = substitui(e, final.l, final.c);
     if (e.peca == VALOR_X) e.peca = VALOR_O;
     else e.peca = VALOR_X;
-    printf("\nO bot jogou na posição : %d %d\n",final.l,final.c);
+    printf("\nO bot jogou na posição : %d %d\n", final.l, final.c);
     printf("\n");
     printa(e);
     printf("\n");

@@ -90,14 +90,14 @@ int substituiAux (ESTADO e,int dir,int l,int c) {
             li++;
             if (li == 8) return 0;
             if (e.peca == VALOR_X) {
-                while (li != 7) {
+                while (li != 8) {
                     if (e.grelha[li][ci] == VAZIA) return 0;
                     if (e.grelha[li][ci] == VALOR_X) return 5;
                     if (e.grelha[li][ci] == VALOR_O) li++;
                 }
                 return 0;
             } else {
-                while (li != 7) {
+                while (li != 8) {
                     if (e.grelha[li][ci] == VAZIA) return 0;
                     if (e.grelha[li][ci] == VALOR_O) return 5;
                     if (e.grelha[li][ci] == VALOR_X) li++;
@@ -107,7 +107,7 @@ int substituiAux (ESTADO e,int dir,int l,int c) {
         case 6:
             li++;
             ci--;
-            if (li == 8 || ci == 0) return 0;
+            if (li == 8 || ci == -1) return 0;
             if (e.peca == VALOR_X) {
                 while (li != 7 && ci != 0) {
                     if (e.grelha[li][ci] == VAZIA) return 0;
