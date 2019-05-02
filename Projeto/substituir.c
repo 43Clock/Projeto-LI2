@@ -6,167 +6,103 @@
 int substituiAux (ESTADO e,int dir,int l,int c) {
     int li = l - 1;
     int ci = c - 1;
+    VALOR v;
+    if (e.peca == VALOR_X) v = VALOR_O;
+    else v = VALOR_X;
     switch (dir) {
         case 1:
-            if (e.peca == VALOR_X) {
-                while (li != 0) {
-                    if (e.grelha[li - 1][ci] == VAZIA) return 0;
-                    if (e.grelha[li - 1][ci] == VALOR_X) return 1;
-                    if (e.grelha[li - 1][ci] == VALOR_O) li--;
-                }
-                return 0;
-            } else {
-                while (li != 0) {
-                    if (e.grelha[li - 1][ci] == VAZIA) return 0;
-                    if (e.grelha[li - 1][ci] == VALOR_O) return 1;
-                    if (e.grelha[li - 1][ci] == VALOR_X) li--;
-                }
-                return 0;
+            li--;
+            if (e.grelha[li][ci] != v) return 0;
+            while (li > -1) {
+                if (e.grelha[li][ci] == VAZIA) return 0;
+                if (e.grelha[li][ci] == e.peca) return 1;
+                if (e.grelha[li][ci] == v) li--;
             }
+            return 0;
         case 2:
-            if (e.peca == VALOR_X) {
-                while (li != 0 && ci != 7) {
-                    if (e.grelha[li - 1][ci+1] == VAZIA) return 0;
-                    if (e.grelha[li - 1][ci+1] == VALOR_X) return 2;
-                    if (e.grelha[li - 1][ci+1] == VALOR_O) {
-                        li--;
-                        ci++;
-                    }
+            li--;
+            ci++;
+            if (e.grelha[li][ci] != v) return 0;
+            while (li > -1 && ci < 8) {
+                if (e.grelha[li][ci] == VAZIA) return 0;
+                if (e.grelha[li][ci] == e.peca) return 2;
+                if (e.grelha[li][ci] == v) {
+                    li--;
+                    ci++;
                 }
-                return 0;
-            } else {
-                while (li != 0 && ci != 7) {
-                    if (e.grelha[li - 1][ci+1] == VAZIA) return 0;
-                    if (e.grelha[li - 1][ci+1] == VALOR_O) return 2;
-                    if (e.grelha[li - 1][ci+1] == VALOR_X) {
-                        li--;
-                        ci++;
-                    }
-                }
-                return 0;
             }
+            return 0;
+
         case 3:
-            if (e.peca == VALOR_X) {
-                while (ci != 7) {
-                    if (e.grelha[li][ci+1] == VAZIA) return 0;
-                    if (e.grelha[li][ci+1] == VALOR_X) return 3;
-                    if (e.grelha[li][ci+1] == VALOR_O) ci++;
-                }
-                return 0;
-            } else {
-                while (ci != 7) {
-                    if (e.grelha[li][ci+1] == VAZIA) return 0;
-                    if (e.grelha[li][ci+1] == VALOR_O) return 3;
-                    if (e.grelha[li][ci+1] == VALOR_X) ci++;
-                }
-                return 0;
+            ci++;
+            if (e.grelha[li][ci] != v) return 0;
+            while (ci < 8) {
+                if (e.grelha[li][ci] == VAZIA) return 0;
+                if (e.grelha[li][ci] == e.peca) return 3;
+                if (e.grelha[li][ci] == v) ci++;
             }
+            return 0;
         case 4:
             li++;
             ci++;
+            if (e.grelha[li][ci] != v) return 0;
             if (li == 8 || ci == 8) return 0;
-            if (e.peca == VALOR_X) {
-                while (li != 7 && ci != 7) {
-                    if (e.grelha[li][ci] == VAZIA) return 0;
-                    if (e.grelha[li][ci] == VALOR_X) return 4;
-                    if (e.grelha[li][ci] == VALOR_O) {
-                        li++;
-                        ci++;
-                    }
+            while (li < 8 && ci < 8) {
+                if (e.grelha[li][ci] == VAZIA) return 0;
+                if (e.grelha[li][ci] == e.peca) return 4;
+                if (e.grelha[li][ci] == v) {
+                    li++;
+                    ci++;
                 }
-                return 0;
-            } else {
-                while (li != 7 && ci != 7) {
-                    if (e.grelha[li][ci] == VAZIA) return 0;
-                    if (e.grelha[li][ci] == VALOR_O) return 4;
-                    if (e.grelha[li][ci] == VALOR_X) {
-                        li++;
-                        ci++;
-                    }
-                }
-                return 0;
             }
+            return 0;
         case 5:
             li++;
+            if (e.grelha[li][ci] != v) return 0;
             if (li == 8) return 0;
-            if (e.peca == VALOR_X) {
-                while (li != 8) {
-                    if (e.grelha[li][ci] == VAZIA) return 0;
-                    if (e.grelha[li][ci] == VALOR_X) return 5;
-                    if (e.grelha[li][ci] == VALOR_O) li++;
-                }
-                return 0;
-            } else {
-                while (li != 8) {
-                    if (e.grelha[li][ci] == VAZIA) return 0;
-                    if (e.grelha[li][ci] == VALOR_O) return 5;
-                    if (e.grelha[li][ci] == VALOR_X) li++;
-                }
-                return 0;
+            while (li < 8) {
+                if (e.grelha[li][ci] == VAZIA) return 0;
+                if (e.grelha[li][ci] == e.peca) return 5;
+                if (e.grelha[li][ci] == v) li++;
             }
+            return 0;
         case 6:
             li++;
             ci--;
-            if (li == 8 || ci == -1) return 0;
-            if (e.peca == VALOR_X) {
-                while (li != 7 && ci != 0) {
-                    if (e.grelha[li][ci] == VAZIA) return 0;
-                    if (e.grelha[li][ci] == VALOR_X) return 6;
-                    if (e.grelha[li][ci] == VALOR_O) {
-                        li++;
-                        ci--;
-                    }
+            if (e.grelha[li][ci] != v) return 0;
+            if (li == 7 || ci == 0) return 0;
+            while (li < 8 && ci < 8) {
+                if (e.grelha[li][ci] == VAZIA) return 0;
+                if (e.grelha[li][ci] == e.peca) return 6;
+                if (e.grelha[li][ci] == v) {
+                    li++;
+                    ci--;
                 }
-                return 0;
-            } else {
-                while (li != 7 && ci != 0) {
-                    if (e.grelha[li][ci] == VAZIA) return 0;
-                    if (e.grelha[li][ci] == VALOR_O) return 6;
-                    if (e.grelha[li][ci] == VALOR_X) {
-                        li++;
-                        ci--;
-                    }
-                }
-                return 0;
             }
+            return 0;
         case 7:
-            if (e.peca == VALOR_X) {
-                while (ci != 0) {
-                    if (e.grelha[li][ci-1] == VAZIA) return 0;
-                    if (e.grelha[li][ci-1] == VALOR_X) return 7;
-                    if (e.grelha[li][ci-1] == VALOR_O) ci--;
-                }
-                return 0;
-            } else {
-                while (ci != 0) {
-                    if (e.grelha[li][ci-1] == VAZIA) return 0;
-                    if (e.grelha[li][ci-1] == VALOR_O) return 7;
-                    if (e.grelha[li][ci-1] == VALOR_X) ci--;
-                }
-                return 0;
+            ci--;
+            if (e.grelha[li][ci] != v) return 0;
+            while (ci > -1) {
+                if (e.grelha[li][ci] == VAZIA) return 0;
+                if (e.grelha[li][ci] == e.peca) return 7;
+                if (e.grelha[li][ci] == v) ci--;
             }
+            return 0;
         case 8:
-            if (e.peca == VALOR_X) {
-                while (li != 0 && ci != 0) {
-                    if (e.grelha[li - 1][ci-1] == VAZIA) return 0;
-                    if (e.grelha[li - 1][ci-1] == VALOR_X) return 8;
-                    if (e.grelha[li - 1][ci-1] == VALOR_O) {
-                        li--;
-                        ci--;
-                    }
+            li--;
+            ci--;
+            if (e.grelha[li][ci] != v) return 0;
+            while (li > -1 && ci > -1) {
+                if (e.grelha[li][ci] == VAZIA) return 0;
+                if (e.grelha[li][ci] == e.peca) return 8;
+                if (e.grelha[li][ci] == v) {
+                    li--;
+                    ci--;
                 }
-                return 0;
-            } else {
-                while (li != 0 && ci != 0) {
-                    if (e.grelha[li - 1][ci-1] == VAZIA) return 0;
-                    if (e.grelha[li - 1][ci-1] == VALOR_O) return 8;
-                    if (e.grelha[li - 1][ci-1] == VALOR_X) {
-                        li--;
-                        ci--;
-                    }
-                }
-                return 0;
             }
+            return 0;
+
     }
 }
 

@@ -80,7 +80,7 @@ ESTADO interfaceJ (ESTADO e, char buffer [],STACK *s,POSICOES *p,VALOR *bot){
     int i,l,cl;
     VALOR v = *bot;
     if (e.peca != VAZIA) {
-        if (e.modo == 0) {
+        if (e.modo == '0') {
             //Vai verificar se a peca foi colocada e se tal aconteceu vai avancar para o prox jogador
             for (i = 0; buffer[i] == 'j' || buffer[i] == 'J' || buffer[i] == ' '; i++);
             l = buffer[i] - 48;

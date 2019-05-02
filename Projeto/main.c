@@ -19,12 +19,14 @@ ESTADO interface (ESTADO e, STACK *s,POSICOES *p) {
             break;
 
         case 'J':
+            //for (i = 1;i<9;i++) printf("%d\n",substituiAux(e,i,7,6));
             e = interfaceJ (e,buffer,s,p,&bot);
-            //printf ("%d\n",podeJogar(e));
             e = interfaceJAux(e,&bot,p);
            break;
         case 'S':
             helpPlz(e);
+            //for (i = 1;i<9;i++) printf("%d\n",substituiAux(e,i,3,2));
+            //printf("%d\n",possivelJogar(e,2,3));
             break;
         case 'H':
             helpPlz2(e);
