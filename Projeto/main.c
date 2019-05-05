@@ -7,7 +7,6 @@
 
 ESTADO interface (ESTADO e, STACK *s,POSICOES *p) {
     char n;
-    int i;
     char buffer[100];
     fgets(buffer,100,stdin);
     n = buffer[0];
@@ -15,18 +14,14 @@ ESTADO interface (ESTADO e, STACK *s,POSICOES *p) {
     switch (toupper(n)) {
         case 'N':
             e = interfaceN(e,buffer,s);
-//            printf("%d\n",bot == e.peca);
             break;
 
         case 'J':
-            //for (i = 1;i<9;i++) printf("%d\n",substituiAux(e,i,7,6));
             e = interfaceJ (e,buffer,s,p,&bot);
             e = interfaceJAux(e,&bot,p);
            break;
         case 'S':
             helpPlz(e);
-            //for (i = 1;i<9;i++) printf("%d\n",substituiAux(e,i,3,2));
-            //printf("%d\n",possivelJogar(e,2,3));
             break;
         case 'H':
             helpPlz2(e);

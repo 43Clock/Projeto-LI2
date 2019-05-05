@@ -70,7 +70,7 @@ int substituiAux (ESTADO e,int dir,int l,int c) {
             li++;
             ci--;
             if (e.grelha[li][ci] != v) return 0;
-            if (li == 7 || ci == 0) return 0;
+            if (li == 8 || ci == -1) return 0;
             while (li < 8 && ci < 8) {
                 if (e.grelha[li][ci] == VAZIA) return 0;
                 if (e.grelha[li][ci] == e.peca) return 6;

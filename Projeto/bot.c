@@ -54,6 +54,7 @@ ESTADO bot1 (ESTADO e,POSICOES *p) {
     printf("\n");
     printa(e);
     printf("\n");
+
     return e;
 }
 
@@ -80,7 +81,7 @@ int conta_mob (ESTADO e,VALOR a) {
     return r;
 }
 
-int minmax (ESTADO e,int depth,int original,POSICOES *p,VALOR bot,POSICAO *final) {
+int minmax (ESTADO e,int depth,int original,int alfa, int beta,POSICOES *p,VALOR bot,POSICAO *final) {
     VALOR v;
     ESTADO e_tmp;
     int max,min,i,aval;
@@ -101,13 +102,15 @@ int minmax (ESTADO e,int depth,int original,POSICOES *p,VALOR bot,POSICAO *final
             if (e.peca == VALOR_X) e.peca = VALOR_O;
             else e.peca = VALOR_X;
             listaPosicoes(e, &s);
-            aval = minmax(e, depth - 1,original, &s, bot,final);
+            aval = minmax(e, depth - 1,original,alfa,beta,&s, bot,final);
             if (aval > max) {
                 max = aval;
                 if (depth == original) {
                     final->l = p->valores[i].l;
                     final->c = p->valores[i].c;
                 }
+            if (aval > alfa) alfa = aval;
+            if (beta <= alfa) break;
             }
             //printf("%d %d %d\n",max,final->l,final->c);
         }
@@ -123,8 +126,10 @@ int minmax (ESTADO e,int depth,int original,POSICOES *p,VALOR bot,POSICAO *final
             if (e.peca == VALOR_X) e.peca = VALOR_O;
             else e.peca = VALOR_X;
             listaPosicoes(e, &s);
-            aval = minmax(e, depth - 1,original, &s, bot,final);
+            aval = minmax(e, depth - 1,original,alfa,beta, &s, bot,final);
             if (aval < min) min = aval;
+            if (aval < beta) beta = aval;
+            if (beta<= alfa) break;
         }
         return min;
     }
@@ -147,10 +152,9 @@ int pontos(ESTADO e,VALOR bot) {
 
 ESTADO bot2 (ESTADO e,char c,POSICOES *p) {
     POSICAO final;
-    VALOR bot = e.peca;
     int cd = c - '0';
-    int i, r;
-    r = minmax(e, (cd * 2) + 1, (cd * 2) + 1, p, e.peca, &final);
+    int r;
+    r = minmax(e, (cd * 2) + 1, (cd * 2) + 1,-100000,100000, p, e.peca, &final);
     e = jogaBot(e, final.l, final.c);
     e = substitui(e, final.l, final.c);
     if (e.peca == VALOR_X) e.peca = VALOR_O;

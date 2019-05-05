@@ -11,7 +11,7 @@
  * @param s Uma stack de listas ligadas para se registar as jogadas feita para que posteriormente seja possivel fazer undo às jogadas.
  * @return Retorna o novo estado de jogo com o proximo jogador a jogar.
  */
-ESTADO interfaceN (ESTADO e, char buffer [],STACK *s) {
+ESTADO interfaceN (ESTADO e, char buffer[],STACK *s) {
     int i;
     e =reset(e);
     for (i = 0;buffer[i] == ' ' || buffer[i] == 'N' || buffer[i] == 'n';i++ );
@@ -78,7 +78,6 @@ ESTADO interfaceA (ESTADO e, char buffer [],STACK *s,VALOR *bot) {
 
 ESTADO interfaceJ (ESTADO e, char buffer [],STACK *s,POSICOES *p,VALOR *bot){
     int i,l,cl;
-    VALOR v = *bot;
     if (e.peca != VAZIA) {
         if (e.modo == '0') {
             //Vai verificar se a peca foi colocada e se tal aconteceu vai avancar para o prox jogador
@@ -114,10 +113,8 @@ ESTADO interfaceJ (ESTADO e, char buffer [],STACK *s,POSICOES *p,VALOR *bot){
                 printf("\n");
                 printa(e);
                 listaPosicoes(e,p);
-                //if (v == e.peca) {
-                    if (e.modo == '1') e = bot1(e, p);
-                    else e = bot2(e, e.modo, p);
-                //}
+                if (e.modo == '1') e = bot1(e, p);
+                else e = bot2(e, e.modo, p);
                 push(e, s);
             }
         }
@@ -126,10 +123,7 @@ ESTADO interfaceJ (ESTADO e, char buffer [],STACK *s,POSICOES *p,VALOR *bot){
     return e;
 }
 
-ESTADO interfaceJAux (ESTADO e,VALOR *bot,POSICOES *p) { // Fazar load do game.txt e tentar resolver o bug de passar a jogada.
-    VALOR v;
-    if (*bot == VALOR_X) v = VALOR_O;
-    else v = VALOR_X;
+ESTADO interfaceJAux (ESTADO e,VALOR *bot,POSICOES *p) {
     if (acabou(e) == 0){
         if (conta (e,VALOR_X)>conta(e,VALOR_O) && e.grelha[4][4] != VAZIA) printf("************************\n**O Jogador *X* ganhou**\n************************\n\n");
         else if (conta (e,VALOR_X)<conta(e,VALOR_O) && e.grelha[4][4] != VAZIA) printf("************************\n**O Jogador *O* ganhou**\n************************\n\n");
@@ -147,7 +141,6 @@ ESTADO interfaceJAux (ESTADO e,VALOR *bot,POSICOES *p) { // Fazar load do game.t
             e.peca = *bot;
             listaPosicoes(e, p);
             e = bot2(e, e.modo, p);
-            //e.peca = v;
         }
     }
     else if (podeJogar(e) == 0 && e.peca == VALOR_O && e.modo > '0') {
@@ -160,7 +153,6 @@ ESTADO interfaceJAux (ESTADO e,VALOR *bot,POSICOES *p) { // Fazar load do game.t
             e.peca = *bot;
             listaPosicoes(e, p);
             e = bot2(e, e.modo, p);
-            //e.peca = v;
         }
     }
     else if (podeJogar(e) == 0 && e.peca == VALOR_O) {
@@ -208,7 +200,7 @@ void interfaceE(ESTADO e,char buffer[]) {
 
 ESTADO interfaceL(ESTADO e,char buffer[],VALOR *bot) {
     FILE *fptr;
-    int i = 2, j,l = 0,c = 0;
+    int i = 2, j,c = 0;
     char nome[100];
     char linha[100];
     char modo,bots;
@@ -235,7 +227,7 @@ ESTADO interfaceL(ESTADO e,char buffer[],VALOR *bot) {
         if (jogador == 'X') e.peca = VALOR_X;
         else if (jogador == 'O') e.peca = VALOR_O;
         else e.peca = VAZIA;
-        e.modo = bot;
+        e.modo = bots;
 
     }
     fseek(fptr,1,SEEK_CUR);
