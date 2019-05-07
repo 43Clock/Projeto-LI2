@@ -5,12 +5,14 @@
 #include "auxiliares.h"
 
 
+
 ESTADO interface (ESTADO e, STACK *s,POSICOES *p) {
     char n;
     char buffer[100];
     fgets(buffer,100,stdin);
     n = buffer[0];
     VALOR bot;
+    POSICAO final;
     switch (toupper(n)) {
         case 'N':
             e = interfaceN(e,buffer,s);
@@ -24,14 +26,16 @@ ESTADO interface (ESTADO e, STACK *s,POSICOES *p) {
             helpPlz(e);
             break;
         case 'H':
-            helpPlz2(e);
+            listaPosicoes(e,p);
+            minmax(e,7,7,-100000,100000, p, e.peca, &final);
+            helpPlz2(e,final.l,final.c);
             break;
         case 'E':
             interfaceE(e,buffer);
             break;
         case 'L':
             e = interfaceL(e,buffer,&bot);
-            initStack(e,s);
+            initStack(s);
             push(e,s);
             break;
         case 'U':
@@ -67,7 +71,7 @@ void print_prompt(ESTADO e) {
 int main() {
     ESTADO e = {0};
     opcoes();
-    STACK s;
+    STACK s =NULL;
     POSICOES p;
     while (1){
         print_prompt(e);

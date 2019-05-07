@@ -30,8 +30,8 @@ ESTADO interfaceN (ESTADO e, char buffer[],STACK *s) {
         printf("\n");
     }
     else e.peca = VAZIA;
-    e.modo  = 0;
-    initStack(e,s);
+    e.modo  = '0';
+    initStack(s);
     push(e,s);
     return e;
 
@@ -70,7 +70,7 @@ ESTADO interfaceA (ESTADO e, char buffer [],STACK *s,VALOR *bot) {
     for (i = 0;buffer[i] == ' ' || toupper(buffer[i]) == 'A'|| toupper(buffer[i]) == 'X'|| toupper(buffer[i]) == 'O';i++);
     d = buffer[i];
     e.modo  = d;
-    initStack(e,s);
+    initStack(s);
     push(e,s);
     return e;
 

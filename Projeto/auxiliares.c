@@ -129,7 +129,7 @@ void helpPlz (ESTADO e) {
     putchar('\n');
 }
 
-void helpPlz2 (ESTADO e) { // sugestão de jogada
+void helpPlz2 (ESTADO e,int l,int c) {
     int i,j, r = 0;
     putchar ('\n');
     printf("  1 2 3 4 5 6 7 8\n");
@@ -139,7 +139,7 @@ void helpPlz2 (ESTADO e) { // sugestão de jogada
             if (e.grelha[i][j] == VALOR_X) printf("X ");
             else if (e.grelha[i][j] == VALOR_O) printf("O ");
             else {
-                if (possivelJogar(e, i + 1, j + 1) == 1 && r == 0){
+                if (i == l-1 && j == c-1){
                     printf("? ");
                     r++;
                 }
@@ -149,6 +149,7 @@ void helpPlz2 (ESTADO e) { // sugestão de jogada
         putchar('\n');
     }
     putchar('\n');
+    printf("%d %d\n",l,c);
 }
 
 int acabou (ESTADO e) { // 0 == não ha jogadas possiveis
@@ -178,8 +179,16 @@ int podeJogar (ESTADO e) {
     return  r;
 }
 
-void initStack (ESTADO e,STACK *s) { // Falta fazer a parte do free;
-    *s = NULL;
+void initStack (STACK *s) {
+    STACK aux = NULL;
+    if (*s != NULL) {
+        while (*s != NULL) {
+            aux = *s;
+            *s = (*s) -> ant;
+            free(aux);
+        }
+    }
+    else *s = NULL;
 }
 
 int isEmpty (STACK *s) {

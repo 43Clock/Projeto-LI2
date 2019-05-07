@@ -28,7 +28,7 @@ ESTADO interfaceA (ESTADO e, char buffer [],STACK *s,VALOR *bot);
 ESTADO interfaceL(ESTADO e,char buffer[],VALOR *bot);
 void interfaceE(ESTADO e,char buffer[]);
 void helpPlz (ESTADO e);
-void helpPlz2 (ESTADO e);
+void helpPlz2 (ESTADO e,int l, int c);
 
 
 //Funcoes auxiliares
@@ -44,7 +44,7 @@ int podeJogar (ESTADO e);
 
 
 //Funcoes da stack
-void initStack (ESTADO e,STACK *s);
+void initStack (STACK *s);
 int isEmpty (STACK *s);
 void push (ESTADO e,STACK *s);
 ESTADO pop (ESTADO e,STACK *s);
@@ -57,5 +57,7 @@ void listaPosicoes (ESTADO e,POSICOES *p);
 int pontos_pos (int l,int c);
 int pontos(ESTADO e,VALOR bot);
 ESTADO bot2 (ESTADO e,char c,POSICOES *p);
+int minmax (ESTADO e,int depth,int original,int alfa, int beta,POSICOES *p,VALOR bot,POSICAO *final);
+int conta_mob (ESTADO e,VALOR a);
 
 #endif //PROJ_AUXILIARES_H
