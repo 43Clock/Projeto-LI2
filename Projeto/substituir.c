@@ -3,6 +3,14 @@
 #include "auxiliares.h"
 #include "estado.h"
 
+/**
+ * @brief Esta função vai ver para cada direção se é possivel fazer a substituição, ou seja, se entre 2 peças de um jogador existem apenas peças do adversário.Esta função tambem é utilizada para verificar se uma jogada é possivel.
+ * @param e O estado do atual do jogo.
+ * @param dir Corresponde a uma direção entre 1 e 8. 1 corresponde para cima, 2 para cima-direita, 3 para direite e assim sucessivamente.
+ * @param l Corresponde à linha que o jogador jogou.
+ * @param c Corresponde à coluna que o jogador jogou.
+ * @return Retorna 0 se para uma dada dir é possivel fazer a substituição e retorna dir se for possivel.
+ */
 int substituiAux (ESTADO e,int dir,int l,int c) {
     int li = l - 1;
     int ci = c - 1;
@@ -106,7 +114,13 @@ int substituiAux (ESTADO e,int dir,int l,int c) {
     }
 }
 
-
+/**
+ * @brief Esta função faz trocar as peças do adversário pelas peçãs do jogador quando este faz uma jogada válida.
+ * @param e O estado atual do jogo.
+ * @param l A linha em que o jogador jogou.
+ * @param c A coluna em que o jogador jogou.
+ * @return O estado depois de se fazerem as substituições
+ */
 ESTADO substitui (ESTADO e,int l, int c) {
     int li, ci, i;
     for (i = 1; i < 9; i++) {

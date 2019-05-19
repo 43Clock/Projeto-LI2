@@ -5,9 +5,9 @@
 #include "estado.h"
 #include "auxiliares.h"
 /**
- *
- * @param e - Estado atual do jogo
- * @param p - Array com todas as posições possiveis para o jogador em questão
+ * @brief Esta função criar um array em que cada elemento é um par equivalente a uma posição em que o jogador pode jogar.
+ * @param e - Estado atual do jogo.
+ * @param p - Array com todas as posições possiveis para o jogador em questão.
  */
 void listaPosicoes (ESTADO e,POSICOES *p) {
     int i,j;
@@ -24,10 +24,10 @@ void listaPosicoes (ESTADO e,POSICOES *p) {
 
 /**
  *
- * @param e - Estado atual do jogo
- * @param l - Linha onde vai jogar
- * @param c - Coluna onde vai jogar
- * @return - Estado depois da jogada
+ * @param e - Estado atual do jogo.
+ * @param l - Linha onde vai jogar.
+ * @param c - Coluna onde vai jogar.
+ * @return - Estado depois de colocar a peça na grelha.
  */
 ESTADO jogaBot (ESTADO e,int l, int c) {
     if (l - 1 >= 8 || c - 1 >= 8 || e.grelha[l - 1][c - 1] != VAZIA) {
@@ -39,7 +39,7 @@ ESTADO jogaBot (ESTADO e,int l, int c) {
 }
 
 /**
- *
+ * @brief Esta funçao corresponde ao bot na primeira dificuldade, e faz com que o bot,usando um algoritmo basico, jogue numa posição.
  * @param e - Estado atual do jogo
  * @param p - Posições possiveis para o bot jogar
  * @return - Estado depois da jogada do bot
@@ -75,9 +75,9 @@ ESTADO bot1 (ESTADO e,POSICOES *p) {
 }
 /**
  * @brief - Matriz usada na heuristica do bot em que cada posição corresponde a uma pontuação
- * @param l - Linha
- * @param c - Coluna
- * @return - Valor da posição
+ * @param l - Linha da jogada.
+ * @param c - Coluna da jogada.
+ * @return - Valor da posição.
  */
 int pontos_pos (int l,int c) {
     int matrizPontos[8][8] = { {25, -5, 14, 10, 10, 14, -5, 25},
@@ -92,10 +92,10 @@ int pontos_pos (int l,int c) {
 }
 
 /**
- *
- * @param e - Estado atual do jogo
- * @param a - O jogador para o qual vai ser contado o numero de jogadas possiveis
- * @return - Quantidade de jogadas possiveis para o jogador
+ * @brief Esta função é usada na heuristica do bot e conta a quantidade de jogadas possiveis que o jogador tem.
+ * @param e - Estado atual do jogo.
+ * @param a - O jogador para o qual vai ser contado o numero de jogadas possiveis.
+ * @return - Quantidade de jogadas possiveis para o jogador.
  */
 int conta_mob (ESTADO e,VALOR a) {
     int i,j,r = 1; //Ver o erro que dava quando r = 0;
@@ -109,16 +109,16 @@ int conta_mob (ESTADO e,VALOR a) {
 }
 
 /**
- *
- * @param e - Estado atual do jogo
+ * @brief A função principal para a jogada do bot. Esta função vai analisa todas a jogadas possiveis, tanto do bot como do jogador, de modo a que, com uma determindada heuristaca, seja feita a jogada mais eficiente.
+ * @param e - Estado atual do jogo.
  * @param depth - O quão fundo o bot vai analisar as jogadas possiveis.
- * @param original - A profundidade original
- * @param alfa - Variavel usada para fazer com que o bot faça o menor numero de verificações possiveis
- * @param beta - Variavel usada para fazer com que o bot faca o menor numero de verificacoes possiveis
- * @param p - Posiçoes onde pode jogar
- * @param bot - Valor do bot
- * @param final - Posicao final
- * @return
+ * @param original - A profundidade original.
+ * @param alfa - Variavel usada para fazer com que o bot faça o menor numero de verificações possiveis.
+ * @param beta - Variavel usada para fazer com que o bot faca o menor numero de verificacoes possiveis.
+ * @param p - Posiçoes onde pode jogar.
+ * @param bot - Valor do bot.
+ * @param final - Endereço com um par correspondente à posicao final.
+ * @return Resultado correspondente ao uso da heuristica ou ao valor max/min que uma determindada jogada vale.
  */
 int minmax (ESTADO e,int depth,int original,int alfa, int beta,POSICOES *p,VALOR bot,POSICAO *final) {
     VALOR v;
@@ -129,7 +129,7 @@ int minmax (ESTADO e,int depth,int original,int alfa, int beta,POSICOES *p,VALOR
     if (bot == VALOR_X) v = VALOR_O;
     else v = VALOR_X;
 
-    if (depth == 0) return pontos(e,bot);
+    if (depth == 0 || p->sp == 0) return pontos(e,bot);
 
     if (bot == e.peca) {
         max = -10000;
@@ -175,15 +175,11 @@ int minmax (ESTADO e,int depth,int original,int alfa, int beta,POSICOES *p,VALOR
 }
 
 /**
- *
- * @param e - Estado atual do jogo
- * @param bot - Valor do bot
- * @return
+ * @brief Esta função é a heuristica que vai determinar os pontos que uma certa jogada vale tendo em atenção a matriz de pontos, a quantidade de peças do jogardor e a mobilidade que este tem.
+ * @param e - Estado atual do jogo.
+ * @param bot - Valor do bot.
+ * @return Retorna o valar da jogada.
  */
-
-
-// Falta return
-
 int pontos(ESTADO e,VALOR bot) {
     VALOR v;
     int i,j,h1 = 0,h2 = 0,h3 = 0;
@@ -199,11 +195,11 @@ int pontos(ESTADO e,VALOR bot) {
     return h1+50*h2+100*h3;
 }
 /**
- *
- * @param e - Estado  atual do jogo
- * @param c
- * @param p
- * @return
+ * @brief Esta função é utilizada para fazer com os os restante bots joguem. A diferença entre as dificuldades corresponde ao quão fundo o bot vai analisar as jogadas com o algoritmo minmax.
+ * @param e - Estado  atual do jogo.
+ * @param c - Corresponde à dificuldade escolhida pelo jogador.
+ * @param p - Lista de todas as posições nas quais o bot pode jogar.
+ * @return Retorna o estado depois de o bot ter jogado.
  */
 ESTADO bot2 (ESTADO e,char c,POSICOES *p) {
     POSICAO final;

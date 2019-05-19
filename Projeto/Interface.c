@@ -37,6 +37,14 @@ ESTADO interfaceN (ESTADO e, char buffer[],STACK *s) {
 
 }
 
+/**
+ * @brief Esta funçoes é utilizada para começar um jogo novo contra um bot. O primeiro jogador a jogar é sempre o que tem a peça X.
+ * @param e Estado atual do jogo para que possa ser resetado e escolhido o primeiro jogador assim como o modo.
+ * @param buffer Um array de caracteres correspondente ao input que se fez para executar esta função. Neste array temos a dificuldade do bot assim como qual é a peça deste.
+ * @param s Uma stack de listas ligadas para se registar as jogadas feita para que posteriormente seja possivel fazer undo às jogadas.
+ * @param bot Um apontador para que se posso saber para outras funções qual é a peça do bot.
+ * @return Retorna o novo estado de jogo com o proximo jogador a jogar.
+ */
 ESTADO interfaceA (ESTADO e, char buffer [],STACK *s,VALOR *bot) {
     int i;
     char d;
@@ -76,11 +84,19 @@ ESTADO interfaceA (ESTADO e, char buffer [],STACK *s,VALOR *bot) {
 
 }
 
+/**
+ * @brief Esta função dependendo do modo em que se encontra o estado vai fazer um que o jogador consiga jogar (ou se for contra o bot que o bot tambem joguem).
+ * @param e Estado atual do jogo.
+ * @param buffer Um array que contem as coordenadas que o jogador que jogar.
+ * @param s Uma stack de listas ligadas para se registar as jogadas feita para que posteriormente seja possivel fazer undo às jogadas.
+ * @param p A lista de posições em que se pode jogar.
+ * @param bot O valor a qual o bot corresponde, é apenas utilizado quando se está em modo automático
+ * @return
+ */
 ESTADO interfaceJ (ESTADO e, char buffer [],STACK *s,POSICOES *p,VALOR *bot){
     int i,l,cl;
     if (e.peca != VAZIA) {
         if (e.modo == '0') {
-            //Vai verificar se a peca foi colocada e se tal aconteceu vai avancar para o prox jogador
             for (i = 0; buffer[i] == 'j' || buffer[i] == 'J' || buffer[i] == ' '; i++);
             l = buffer[i] - 48;
             i++;
@@ -88,7 +104,6 @@ ESTADO interfaceJ (ESTADO e, char buffer [],STACK *s,POSICOES *p,VALOR *bot){
             cl = buffer[i] - 48;
             if (possivelJogar(e, l, cl) == 0) printf("Jogada impossivel!!!!\n\n");
             else {
-                //Vai executar a funcao e colocar uma peca no lugar
                 e = jogar(e, buffer);
                 e = substitui(e, l, cl);
                 if (e.peca == VALOR_X) e.peca = VALOR_O;
@@ -123,49 +138,62 @@ ESTADO interfaceJ (ESTADO e, char buffer [],STACK *s,POSICOES *p,VALOR *bot){
     return e;
 }
 
+/**
+ * @brief Esta função é usada para depois de cada jogada, verificar se o jogo já acabou, se o jogador tem ou não de passar turno ou se alguem ja ganhou o jogo.
+ * @param e Estado atual de jogo.
+ * @param bot O valor correspondente ao bot.
+ * @param p A lista de posições para que possa ser usada no bot.
+ * @return Retorna o estado depois de verificar as condições referidas.
+ */
 ESTADO interfaceJAux (ESTADO e,VALOR *bot,POSICOES *p) {
-    if (acabou(e) == 0){
-        if (conta (e,VALOR_X)>conta(e,VALOR_O) && e.grelha[4][4] != VAZIA) printf("************************\n**O Jogador *X* ganhou**\n************************\n\n");
-        else if (conta (e,VALOR_X)<conta(e,VALOR_O) && e.grelha[4][4] != VAZIA) printf("************************\n**O Jogador *O* ganhou**\n************************\n\n");
-        else if (conta (e,VALOR_X)==conta(e,VALOR_O) && e.grelha[4][4] != VAZIA)printf("************************\n*********Empate*********\n************************\n\n");
-        e.peca = VAZIA;
-        e = reset (e);
-    }
-    else if (podeJogar(e) == 0 && e.peca == VALOR_X && e.modo > '0') {
-        if (e.peca == *bot) {
-            printf("O bot não consegue jogar. Turno passa para jogador O\n");
+    if (e.peca == VAZIA) printf("Ainda não começou o jogo !!!!\n\n");
+    else {
+        if (acabou(e) == 0) {
+            if (conta(e, VALOR_X) > conta(e, VALOR_O) && e.grelha[4][4] != VAZIA)
+                printf("************************\n**O Jogador *X* ganhou**\n************************\n\n");
+            else if (conta(e, VALOR_X) < conta(e, VALOR_O) && e.grelha[4][4] != VAZIA)
+                printf("************************\n**O Jogador *O* ganhou**\n************************\n\n");
+            else if (conta(e, VALOR_X) == conta(e, VALOR_O) && e.grelha[4][4] != VAZIA)
+                printf("************************\n*********Empate*********\n************************\n\n");
+            e.peca = VAZIA;
+            e.modo = '0';
+            e = reset(e);
+        } else if (podeJogar(e) == 0 && e.peca == VALOR_X && e.modo > '0') {
+            if (e.peca == *bot) {
+                printf("O bot não consegue jogar. Turno passa para jogador O\n");
+                e.peca = VALOR_O;
+            } else {
+                printf("O Jogador X não consegue jogar. Turno passado para o bot\n");
+                e.peca = *bot;
+                listaPosicoes(e, p);
+                e = bot2(e, e.modo, p);
+            }
+        } else if (podeJogar(e) == 0 && e.peca == VALOR_O && e.modo > '0') {
+            if (e.peca == *bot) {
+                printf("O bot não consegue jogar. Turno passa para jogador O\n");
+                e.peca = VALOR_X;
+            } else {
+                printf("O Jogador X não consegue jogar. Turno passado para o bot\n");
+                e.peca = *bot;
+                listaPosicoes(e, p);
+                e = bot2(e, e.modo, p);
+            }
+        } else if (podeJogar(e) == 0 && e.peca == VALOR_O) {
+            printf("Jogador O não consegue jogar. Turno passa para jogador X\n");
+            e.peca = VALOR_X;
+        } else if (podeJogar(e) == 0 && e.peca == VALOR_X) {
+            printf("Jogador X não consegue jogar. Turno passa para jogador X\n");
             e.peca = VALOR_O;
         }
-        else {
-            printf("O Jogador X não consegue jogar. Turno passado para o bot\n");
-            e.peca = *bot;
-            listaPosicoes(e, p);
-            e = bot2(e, e.modo, p);
-        }
-    }
-    else if (podeJogar(e) == 0 && e.peca == VALOR_O && e.modo > '0') {
-        if (e.peca == *bot) {
-            printf("O bot não consegue jogar. Turno passa para jogador O\n"); 
-            e.peca = VALOR_X;
-        }
-        else {
-            printf("O Jogador X não consegue jogar. Turno passado para o bot\n");
-            e.peca = *bot;
-            listaPosicoes(e, p);
-            e = bot2(e, e.modo, p);
-        }
-    }
-    else if (podeJogar(e) == 0 && e.peca == VALOR_O) {
-        printf("Jogador O não consegue jogar. Turno passa para jogador X\n");
-        e.peca = VALOR_X;
-    }
-    else if (podeJogar(e) == 0 && e.peca == VALOR_X){
-        printf("Jogador X não consegue jogar. Turno passa para jogador X\n");
-        e.peca = VALOR_O;
     }
     return  e;
 }
 
+/**
+ * @brief Esta função serve para criar um ficheiro com a informação de um estado de jogo.
+ * @param e Estado atual de jogo.
+ * @param buffer Array com o nome do ficheiro para guardar o jogo.
+ */
 void interfaceE(ESTADO e,char buffer[]) {
     FILE *fptr;
     int i = 2, j,l,c;
@@ -198,6 +226,13 @@ void interfaceE(ESTADO e,char buffer[]) {
     printf("\nJogo guardado com sucesso!!\n");
 }
 
+/**
+ * @brief Esta função serve para ler um ficheiro de modo a jogar com o estado presente nesse ficheiro.
+ * @param e Estado atual de jogo.
+ * @param buffer Array com o nome do ficheiro.
+ * @param bot Caso no ficheiro esteja o modo automatico, o valor do bot vai ser guardado neste apontador.
+ * @return Retorna o estado de jogo que estava no ficheiro.
+ */
 ESTADO interfaceL(ESTADO e,char buffer[],VALOR *bot) {
     FILE *fptr;
     int i = 2, j,c = 0;

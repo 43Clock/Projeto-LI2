@@ -26,9 +26,12 @@ ESTADO interface (ESTADO e, STACK *s,POSICOES *p) {
             helpPlz(e);
             break;
         case 'H':
-            listaPosicoes(e,p);
-            minmax(e,7,7,-100000,100000, p, e.peca, &final);
-            helpPlz2(e,final.l,final.c);
+            if (e.peca == VAZIA) printf("Ainda não começou o jogo !!!!\n\n");
+            else {
+                listaPosicoes(e, p);
+                minmax(e, 7, 7, -100000, 100000, p, e.peca, &final);
+                helpPlz2(e, final.l, final.c);
+            }
             break;
         case 'E':
             interfaceE(e,buffer);
